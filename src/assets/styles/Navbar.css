@@ -1,0 +1,13 @@
+.navbar {
+    color: black;
+  }
+
+  .navbar a {
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: white;
+  }

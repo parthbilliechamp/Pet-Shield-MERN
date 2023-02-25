@@ -1,0 +1,21 @@
+.AvailableBox {
+    border: 1px solid #ccc;
+    display: inline-block;
+    text-align: center;
+    margin: 10px;
+    background-color: white;
+    color: black;
+  }
+  
+  .BookedBox {
+    width: 75px;
+    height: 75px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    text-align: center;
+    margin: 10px;
+  }
+
+  .btn:hover {
+    background-color: rgb(95 175 225);
+  }

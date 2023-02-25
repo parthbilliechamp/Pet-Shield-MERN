@@ -1,0 +1,25 @@
+.btn-modify {
+  background-color: rgb(212, 214, 214);
+  color: rgb(14, 0, 0);
+}
+
+.btn-modify:hover {
+  background-color: rgb(95 175 225);
+  color: #fff;
+}
+
+.btn-cancel {
+  background-color: rgb(212, 214, 214);
+  color: rgb(14, 0, 0);
+}
+
+.btn-cancel:hover {
+  background-color: rgb(95 175 225);
+  color: #fff;
+}
+
+.window-box {
+  background-color: rgb(95 175 225);
+}
+
+
