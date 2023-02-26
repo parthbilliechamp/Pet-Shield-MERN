@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { Button} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { useNavigate } from "react-router-dom";
 import Link from '@mui/material/Link';
-import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 
 
@@ -29,8 +26,22 @@ const Login = () => {
     const [isValidateForm, setIsValidateForm] = useState(false);
 
     useEffect(()=>{
+        
         if (isValidateForm) {
-            handleSubmit();
+                if (formValues.email.value === "group5petowner@gmail.com") {
+                    window.location.href = '/pet_owner_dashboard'; 
+                }
+                else if (formValues.email.value === "group5vets@gmail.com") {
+                    window.location.href = '/vet_dashboard'; 
+                }
+                else {
+                    setFormValues((formValues) => ({
+                        ...formValues,
+                        authentication: {
+                            errorMessage: "Unauthorized User",
+                        },
+                    }));
+                }
         }
         setIsValidateForm(false);
     }, [isValidateForm]);
@@ -76,24 +87,24 @@ const Login = () => {
 
         setIsValidateForm(isValidate);
     }
-    const handleSubmit = () => {
-        // event.preventDefault();
-        if (formValues.email.value === "group5petowner@gmail.com") {
-            window.location.href = '/pet_owner_dashboard'; 
-        }
-        else if (formValues.email.value === "group5vets@gmail.com") {
-            window.location.href = '/vet_dashboard'; 
-        }
-        else {
-            setFormValues((formValues) => ({
-                ...formValues,
-                authentication: {
-                    errorMessage: "Unauthorized User",
-                },
-            }));
-        }
+    // const handleSubmit = () => {
+    //     // event.preventDefault();
+    //     if (formValues.email.value === "group5petowner@gmail.com") {
+    //         window.location.href = '/pet_owner_dashboard'; 
+    //     }
+    //     else if (formValues.email.value === "group5vets@gmail.com") {
+    //         window.location.href = '/vet_dashboard'; 
+    //     }
+    //     else {
+    //         setFormValues((formValues) => ({n
+    //             ...formValues,
+    //             authentication: {
+    //                 errorMessage: "Unauthorized User",
+    //             },
+    //         }));
+    //     }
 
-    }
+    // }
 
     const handleChangeWithValidate = (event) => {
         validate(event);

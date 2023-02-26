@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
+import React, { useState} from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { Button, Paper } from "@mui/material";
-import Typography from "@mui/material/Typography"
-import { useNavigate } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 import Link from '@mui/material/Link';
 import Stack from "@mui/material/Stack";
 
 const Registration = (props) => {
-  const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     firstName: {
       value: "",
@@ -92,7 +89,7 @@ const Registration = (props) => {
       },
     }));
 
-    const passwordRegex = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]*$/;
+    const passwordRegex = /^[a-zA-Z0-9!@#$%^&*)(+=._-]*$/;
 
     let passwordErrorMessage = formValues.password.value === "" ?
       "Password is Required" :
