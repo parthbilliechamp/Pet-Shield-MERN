@@ -3,6 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { IconButton } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
 
 
 export default function HomeNavbar() {
@@ -47,8 +48,10 @@ export default function HomeNavbar() {
                         marginLeft: 'auto',
                         mr: { xs: 3, md: 9 }
                     }}
+                    
                 >
-                    Login/Sign-up
+                <Link href="/login" style={{ fontSize: 13 }} color={"#FF9800"} align="right"> Login/Sign-up</Link>
+                   
                 </IconButton>
             </Toolbar>
         </AppBar>

@@ -14,12 +14,24 @@ import Success from "../pages/vet/Success";
 import UpdateMedicalRecord from "../pages/vet/UpdateMedicalRecord";
 import ViewMedicalDetailsVetHome from "../pages/vet/ViewMedicalDetailsVetHome";
 import PetMedicalDetails from "../pages/vet/PetMedicalDetails";
+import Login from "../pages/Login";
+import RegistrationDoctor from "../pages/RegistrationDoctor";
+import ForgotPassword from "../pages/ForgotPassword";
+import Registration from "../pages/Registration";
+
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
+      
+        {/* User Management */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/forgotpassword"element={<ForgotPassword />} />
+        <Route path="/registrationdoctor"element={<RegistrationDoctor />} />
+
 
         {/* Pet Owner Dashboard */}
         <Route path="/pet_owner_dashboard" element={<PetOwnerDashboard />} />
