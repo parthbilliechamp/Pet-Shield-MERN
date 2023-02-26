@@ -44,7 +44,7 @@ const Login = () => {
                 }
         }
         setIsValidateForm(false);
-    }, [isValidateForm]);
+    }, [isValidateForm, formValues]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;

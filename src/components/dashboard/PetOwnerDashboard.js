@@ -1,5 +1,6 @@
 import React from 'react'
 import ServiceCards from '../common/ServiceCards'
+import PetOwnerNavbar from '../common/PetOwnerNavbar';
 
 export default function PetOwnerDashboard() {
 
@@ -37,6 +38,9 @@ export default function PetOwnerDashboard() {
   ];
 
   return (
+    <>
+    <PetOwnerNavbar />
     <ServiceCards services={services} />
+    </>
   )
 }
