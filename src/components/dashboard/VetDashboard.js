@@ -10,11 +10,18 @@ export default function VetDashboard() {
       link: "/service1",
     },
     {
+      name: "Add Medical Record for Pet.",
+      image: "https://via.placeholder.com/150",
+      description:
+        "Add medical record for a new pet that took consultation.",
+      link: "/add_medical_record",
+    },
+    {
       name: "View Medical History of Pets.",
       image: "https://via.placeholder.com/150",
       description:
-        "View and Manage medical history of the pet that took consultation.",
-      link: "/service2",
+        "View and Manage medical history of the pet that came for consultation.",
+      link: "/medical_records",
     },
     {
       name: "View My Feedback",
