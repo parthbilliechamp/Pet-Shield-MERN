@@ -13,6 +13,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import PetOwnerNavbar from '../../components/common/PetOwnerNavbar';
 
 export default function OwnerPetMedicalDetails() {
 
@@ -30,6 +31,8 @@ export default function OwnerPetMedicalDetails() {
     }
 
     return (
+        <>
+        <PetOwnerNavbar/>
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
@@ -99,5 +102,6 @@ export default function OwnerPetMedicalDetails() {
                 </Paper>
             </Container>
         </ThemeProvider>
+        </>
     )
 }

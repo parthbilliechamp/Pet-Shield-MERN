@@ -13,6 +13,7 @@ import Stack from '@mui/material/Stack';
 import SearchIcon from '@mui/icons-material/Search';
 import { InputAdornment } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import VetNavBar from '../../components/common/VetNavbar';
 
 
 export default function ViewMedicalDetailsVetHome() {
@@ -162,6 +163,8 @@ export default function ViewMedicalDetailsVetHome() {
     }
 
     return (
+        <>
+        <VetNavBar/>
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Container component="main" maxWidth="lg" sx={{ mb: 4 }}>
@@ -238,5 +241,6 @@ export default function ViewMedicalDetailsVetHome() {
                 </Paper>
             </Container>
         </ThemeProvider>
+        </>
     )
 }

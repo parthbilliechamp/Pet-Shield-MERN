@@ -5,9 +5,6 @@ import { useNavigate } from "react-router-dom";
 const ServiceCard = ({ name, image, description, link, feature, pagelink }) => {
   const navigate = useNavigate();
 
-  console.log("inside service card" + feature);
-  console.log("inside service card" + pagelink);
-
   return (
     <Card style={{ width: "18rem", marginBottom: "20px" }}>
       <Card.Header>
@@ -27,7 +24,7 @@ const ServiceCard = ({ name, image, description, link, feature, pagelink }) => {
             })
           }
           variant="light"
-          style={{ backgroundColor: "rgb(95 175 225)" }}
+          style={{ backgroundColor: "#1e69ba", color: "white"}}
         >
           View More
         </Button>
@@ -38,7 +35,6 @@ const ServiceCard = ({ name, image, description, link, feature, pagelink }) => {
 };
 
 const ServiceCards = ({ services }) => {
-  console.log("Inside service cards " + services.state);
 
   return (
     <div style={{ marginLeft: "20px" }}>

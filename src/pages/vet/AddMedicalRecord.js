@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import VetNavBar from '../../components/common/VetNavbar';
 
 export default function AddMedicalRecord() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -22,6 +23,8 @@ export default function AddMedicalRecord() {
     }
 
     return (
+        <>
+        <VetNavBar/>
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
@@ -284,5 +287,6 @@ export default function AddMedicalRecord() {
                 </Paper>
             </Container>
         </ThemeProvider>
+        </>
     )
 }

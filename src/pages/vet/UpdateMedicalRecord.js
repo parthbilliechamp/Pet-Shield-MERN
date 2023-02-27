@@ -11,6 +11,7 @@ import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+import VetNavBar from '../../components/common/VetNavbar';
 
 export default function UpdateMedicalRecord() {
 
@@ -26,6 +27,8 @@ export default function UpdateMedicalRecord() {
     }
 
     return (
+        <>
+        <VetNavBar/>
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
@@ -303,5 +306,6 @@ export default function UpdateMedicalRecord() {
                 </Paper>
             </Container>
         </ThemeProvider>
+        </>
     )
 }

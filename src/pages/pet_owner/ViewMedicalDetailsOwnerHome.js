@@ -13,6 +13,7 @@ import Stack from '@mui/material/Stack';
 import SearchIcon from '@mui/icons-material/Search';
 import { InputAdornment } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import PetOwnerNavbar from '../../components/common/PetOwnerNavbar';
 
 
 export default function ViewMedicalDetailsOwnerHome() {
@@ -90,6 +91,8 @@ export default function ViewMedicalDetailsOwnerHome() {
     }
 
     return (
+        <>
+        <PetOwnerNavbar/>
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Container component="main" maxWidth="lg" sx={{ mb: 4 }}>
@@ -157,5 +160,6 @@ export default function ViewMedicalDetailsOwnerHome() {
                 </Paper>
             </Container>
         </ThemeProvider>
+        </>
     )
 }

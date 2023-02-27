@@ -6,6 +6,7 @@ import AppointmentCard from "./AppointmentCard";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import { CssBaseline, Paper } from "@mui/material";
+import VetNavBar from "../../components/common/VetNavbar";
 
 const AppointmentPage = (props) => {
   const theme = createTheme();
@@ -25,6 +26,8 @@ const AppointmentPage = (props) => {
   console.log(location.state?.btnname);
 
   return (
+    <>
+    <VetNavBar/>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Paper
@@ -53,6 +56,7 @@ const AppointmentPage = (props) => {
         </Grid>
       </Paper>
     </ThemeProvider>
+    </>
   );
 };
 export default AppointmentPage;

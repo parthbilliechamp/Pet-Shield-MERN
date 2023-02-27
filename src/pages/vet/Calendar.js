@@ -7,6 +7,7 @@ import { Button } from "primereact/button";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Paper } from "@mui/material";
+import VetNavBar from "../../components/common/VetNavbar";
 
 export default function AppointmentCalendar() {
   window.scrollTo(0, 0);
@@ -23,6 +24,8 @@ export default function AppointmentCalendar() {
     : (buttonname = "cancel");
 
   return (
+    <>
+    <VetNavBar/>
     <Paper
       sx={{ mx: { xs: 3, md: 45 }, my: { xs: 3, md: 5 }, p: { xs: 2, md: 3 } }}
     >
@@ -69,6 +72,7 @@ export default function AppointmentCalendar() {
         </div>
       </StyledCalendar>
     </Paper>
+    </>
   );
 }
 

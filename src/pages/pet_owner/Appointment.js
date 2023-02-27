@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Row, Col, Button, Modal } from "react-bootstrap";
-import "../../assets/styles/pet_owner/Appointment.css";
+
 import SuccessAlert from "../../components/pet_owner/SuccessAlert";
 import { useNavigate } from "react-router-dom";
+import PetOwnerNavbar from "../../components/common/PetOwnerNavbar";
 
 function ViewAppointments({ appointment }) {
   const [alert, setAlert] = useState(null);
@@ -72,6 +73,7 @@ function ViewAppointments({ appointment }) {
                 type="button"
                 className="btn btn-modify fs-5 fw-normal"
                 onClick={handleShowModify}
+                style={{ backgroundColor: "#1e69ba", color: "white" }}
               >
                 Modify Booking
               </button>
@@ -103,6 +105,7 @@ function ViewAppointments({ appointment }) {
                 type="button"
                 className="btn btn-cancel fs-5 fw-normal"
                 onClick={handleShowCancel}
+                style={{ backgroundColor: "#1e69ba", color: "white" }}
               >
                 Cancel Booking
               </button>
@@ -139,38 +142,39 @@ function ViewAppointments({ appointment }) {
 }
 
 export default function Appointment() {
-
   const appointments = [
     {
       id: 1,
-      appointment_date: '23 March 2023',
-      appointment_time: '10:00 AM',
-      vet_name: 'Ana Plante',
-      clinic_name: 'Smile Clinic',
-      clinic_contact: '+1 224 324 3332',
-      clinic_address: '1234, Street Ave, Halifax'
+      appointment_date: "23 March 2023",
+      appointment_time: "10:00 AM",
+      vet_name: "Ana Plante",
+      clinic_name: "Smile Clinic",
+      clinic_contact: "+1 224 324 3332",
+      clinic_address: "1234, Street Ave, Halifax",
     },
     {
       id: 2,
-      appointment_date: '23 March 2023',
-      appointment_time: '10:00 AM',
-      vet_name: 'Ana Plante',
-      clinic_name: 'Smile Clinic',
-      clinic_contact: '+1 224 324 3332',
-      clinic_address: '1234, Street Ave, Halifax'
+      appointment_date: "23 March 2023",
+      appointment_time: "10:00 AM",
+      vet_name: "Ana Plante",
+      clinic_name: "Smile Clinic",
+      clinic_contact: "+1 224 324 3332",
+      clinic_address: "1234, Street Ave, Halifax",
     },
     {
       id: 1,
-      appointment_date: '23 March 2023',
-      appointment_time: '10:00 AM',
-      vet_name: 'Ana Plante',
-      clinic_name: 'Smile Clinic',
-      clinic_contact: '+1 224 324 3332',
-      clinic_address: '1234, Street Ave, Halifax'
-    }
+      appointment_date: "23 March 2023",
+      appointment_time: "10:00 AM",
+      vet_name: "Ana Plante",
+      clinic_name: "Smile Clinic",
+      clinic_contact: "+1 224 324 3332",
+      clinic_address: "1234, Street Ave, Halifax",
+    },
   ];
 
   return (
+    <>
+    <PetOwnerNavbar/>
     <div className="my-5">
       <div className="card w-50 mx-auto">
         <div className="card-header">
@@ -196,5 +200,6 @@ export default function Appointment() {
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import p4 from "../../assets/images/Profileimg/p4.jpg";
+import VetNavBar from "../../components/common/VetNavbar";
 
 const AppointmentDetails = () => {
   window.scrollTo(0, 0);
 
   return (
+    <>
+    <VetNavBar/>
     <AppointmentDetailsWrapper>
       <div className="image">
         <img alt="not found" src={p4}></img>
@@ -24,6 +27,7 @@ const AppointmentDetails = () => {
         </div>
       </div>
     </AppointmentDetailsWrapper>
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ import '../../assets/styles/pet_owner/ClinicAndVetDetails.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TimeSlotBox from "../pet_owner/TimeSlotBox";
+import PetOwnerNavbar from "../common/PetOwnerNavbar";
 
 export default function TimeSlot() {
   const [startDate, setStartDate] = useState(new Date());
@@ -37,6 +38,7 @@ export default function TimeSlot() {
 
   return (
     <>
+      <PetOwnerNavbar/>
       <div className="my-5">
         <div className="card w-50 mx-auto">
           <div className="card-body">

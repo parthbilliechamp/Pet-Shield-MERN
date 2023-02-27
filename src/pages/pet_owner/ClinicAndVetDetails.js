@@ -3,6 +3,7 @@ import { Row, Col, Button } from "react-bootstrap";
 import '../../assets/styles/pet_owner/ClinicAndVetDetails.css';
 import SuccessAlert from "../../components/pet_owner/SuccessAlert";
 import { Link } from "react-router-dom";
+import PetOwnerNavbar from "../../components/common/PetOwnerNavbar";
 
 function ClinicAndVetDetails({ vet, clinic }) {
   const [alert, setAlert] = useState(null);
@@ -85,7 +86,7 @@ function ClinicAndVetDetails({ vet, clinic }) {
                 <Col xs={12} md={4}>
                   <Button
                     variant="light"
-                    style={{ backgroundColor: "rgb(95 175 225)" }}
+                    style={{ backgroundColor: "#1e69ba", color: "white" }}
                     href="book"
                     onClick={(e) => showAlert(e, "Booking Confirmed!!!", "Success")}
                   >
@@ -125,8 +126,11 @@ export default function VetAndClinicDetails() {
   }
 
   return (
+    <>
+    <PetOwnerNavbar/>
     <div className="container">
       <ClinicAndVetDetails vet={vet} clinic={clinic} />
     </div>
+    </>
   );
 }

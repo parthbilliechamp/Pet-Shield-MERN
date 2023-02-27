@@ -13,6 +13,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import VetNavBar from '../../components/common/VetNavbar';
 
 
 export default function PetMedicalDetails() {
@@ -31,6 +32,8 @@ export default function PetMedicalDetails() {
     }
 
     return (
+        <>
+        <VetNavBar/>
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
@@ -100,5 +103,6 @@ export default function PetMedicalDetails() {
                 </Paper>
             </Container>
         </ThemeProvider>
+        </>
     )
 }

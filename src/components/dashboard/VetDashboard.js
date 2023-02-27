@@ -1,48 +1,42 @@
 import React from "react";
 import ServiceCards from "../common/ServiceCards";
-import Vet1 from "../../assets/images/Vetimg/Vet1.jpg";
-import Vet2 from "../../assets/images/Vetimg/Vet2.jpg";
-import Vet3 from "../../assets/images/Vetimg/Vet3.jpg";
-import Vet4 from "../../assets/images/Vetimg/Vet4.jpg";
+import Image1 from "../../assets/images/Vetimg/Image1.jpg";
+import Image2 from "../../assets/images/Vetimg/Image2.jpg";
+import Image3 from "../../assets/images/Vetimg/Image3.jpg";
+import Image5 from "../../assets/images/Vetimg/Image5.jpg";
+import Image7 from "../../assets/images/Vetimg/Image7.jpg";
+import VetNavBar from "../common/VetNavbar";
 
 export default function VetDashboard() {
   const services = [
     {
-      name: "View Upcoming Bookings.",
-      image: Vet1,
-      description: "View Upcoming bookings with the clients.",
-      link: "/service1",
-      feature: "cancel",
-      pagelink: "/cancel_appointment_page",
-    },
-    {
-      name: "Add Medical Record for Pet.",
-      image: Vet2,
+      name: "Add Medical Record",
+      image: Image1,
       description: "Add medical record for a new pet that took consultation.",
       link: "/add_medical_record",
       feature: "cancel",
       pagelink: "/cancel_appointment_page",
     },
     {
-      name: "View Medical History of Pets.",
-      image: Vet3,
+      name: "View Medical History",
+      image: Image2,
       description:
         "View and Manage medical history of the pet that came for consultation.",
       link: "/medical_records",
-      feature: "cancel",
-      pagelink: "/cancel_appointment_page",
+      feature: "",
+      pagelink: "",
     },
     {
       name: "View My Feedback",
-      image: Vet4,
+      image: Image5,
       description: "View ratings and feedbacks given by the clients.",
-      link: "/service4",
-      feature: "cancel",
-      pagelink: "/cancel_appointment_page",
+      link: "/comingsoon",
+      feature: "",
+      pagelink: "",
     },
     {
-      name: "View Appointment",
-      image: Vet3,
+      name: "View Appointments",
+      image: Image7,
       description: "View your upcoming appointments",
       link: "/view_appointment_cal",
       feature: "view details",
@@ -50,7 +44,7 @@ export default function VetDashboard() {
     },
     {
       name: "Cancel Appointment",
-      image: Vet2,
+      image: Image7,
       description: "Cancel your appointment for the pet owners",
       link: "/cancel_appointment_cal",
       feature: "cancel",
@@ -58,13 +52,18 @@ export default function VetDashboard() {
     },
     {
       name: "Add Availability",
-      image: Vet1,
+      image: Image3,
       description: "Add  your availability for pet owners ",
       link: "/add_availability",
-      feature: "cancel",
-      pagelink: "/cancel_appointment_page",
+      feature: "",
+      pagelink: "",
     },
   ];
 
-  return <ServiceCards services={services} />;
+  return (
+    <>
+    <VetNavBar/>
+    <ServiceCards services={services} />
+    </>
+  )
 }

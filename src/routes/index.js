@@ -23,6 +23,7 @@ import AvailabililtyForm from "../pages/vet/AddAvailability";
 import AppointmentCalendar from "../pages/vet/Calendar";
 import AppointmentPage from "../pages/vet/AppointmentPage";
 import AppointmentDetails from "../pages/vet/AppointmentDetails";
+import ComingSoon from "../pages/ComingSoon";
 
 const AppRoutes = () => {
   return (
@@ -37,7 +38,7 @@ const AppRoutes = () => {
         <Route path="/registrationdoctor" element={<RegistrationDoctor />} />
 
         {/* Pet Owner Dashboard */}
-        <Route path="/pet_owner_dashboard" element={<PetOwnerDashboard />} />
+        <Route path="/pet_owner_dashboard" element={<PetOwnerDashboard/>} />
         <Route path="/view_vets" element={<VetList />} />
         <Route path="/book" element={<ClinicAndVetDetails />} />
         <Route path="/timeslot" element={<TimeSlot />} />
@@ -73,6 +74,9 @@ const AppRoutes = () => {
         <Route path="/view_appointment_cal" element={<AppointmentCalendar />} />
         <Route path="/view_appointment_page" element={<AppointmentPage />} />
         <Route path="/appointmentdetails" element={<AppointmentDetails />} />
+
+        <Route path="comingsoon" element={<ComingSoon />} />
+
       </Routes>
     </Router>
   );

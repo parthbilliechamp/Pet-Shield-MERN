@@ -4,6 +4,7 @@ import styled from "styled-components";
 import login_img from "../../assets/images/login.jpg";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
+import VetNavBar from "../../components/common/VetNavbar";
 
 const AvailabililtyForm = () => {
   const [date, setDate] = useState();
@@ -28,6 +29,8 @@ const AvailabililtyForm = () => {
   };
 
   return (
+    <>
+    <VetNavBar/>
     <StyledLoginImgWrapper className="login-img-wrapper">
       <form className="login-form" name="addavailability">
         <Typography variant="h2" paddingBottom={5}>
@@ -102,6 +105,7 @@ const AvailabililtyForm = () => {
         <img src={login_img} alt="" />
       </div>
     </StyledLoginImgWrapper>
+    </>
   );
 };
 

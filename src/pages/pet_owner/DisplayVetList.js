@@ -4,6 +4,7 @@ import "../../assets/styles/pet_owner/DisplayVetList.css";
 import { Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import PetOwnerNavbar from "../../components/common/PetOwnerNavbar";
 
 function DisplayVetList({ vet }) {
   return (
@@ -14,7 +15,7 @@ function DisplayVetList({ vet }) {
         </div>
       </Col>
       <Col xs={12} sm={12} md={4}>
-        <h4 style={{ color: "rgb(95 175 225)" }}>{vet.name}</h4>
+        <h4 style={{ color: "#1e69ba" }}>{vet.name}</h4>
         <h5>{vet.clinic}</h5>
         <p>{vet.address}</p>
         <p>{vet.contact}</p>
@@ -32,7 +33,7 @@ function DisplayVetList({ vet }) {
         <Link to="/timeslot">
           <Button
             variant="light"
-            style={{ backgroundColor: "rgb(95 175 225)" }}
+            style={{ backgroundColor: "#1e69ba", color: "white" }}
           >
             Book Appointment
           </Button>
@@ -109,6 +110,8 @@ function VetList() {
   };
 
   return (
+    <>
+    <PetOwnerNavbar/>
     <div className="my-5">
       <div className="card w-50 mx-auto">
         <div className="card-header">
@@ -158,6 +161,7 @@ function VetList() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
