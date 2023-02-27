@@ -1,15 +1,18 @@
-# Assignment 1
+# Project Proposal 
 
 * *Date Created*: 01 Feb 2023
-* *Last Modification Date*: 04 Feb 2023
-* *Git URL (main branch)*: https://git.cs.dal.ca/shivangkum/csci5709
-* *Git URL (assignment1 branch)*: https://git.cs.dal.ca/shivangkum/csci5709/-/tree/assignment1
+* *Last Modification Date*: 26 Feb 2023
+* *Git URL (main branch)*: https://git.cs.dal.ca/ppc/group_5_csci5709
+* *Git URL (branch)*: 
 
 
 ## Authors
 
-* [Shivangkumar Gandhi](sh966188@dal.ca)
-
+* [Shivangkumar Gandhi (B00916876)](sh966188@dal.ca)
+* [Jaivik Tailor (B00915987)](jv711224@dal.ca)
+* [Parth Champaneria (B00918132)](pr514457@dal.ca)
+* [Utsav Singh (B00923487)](ut796069@dal.ca) 
+* [Abhinav Singh (B00915090](abhinav.singh@dal.ca) 
 
 ## Getting Started
 
@@ -70,12 +73,17 @@ Add additional notes about how to deploy this on a live system
 - Deploy project with github/gitlab option
 - Configure Deployment settings
 
-URL: 
+URL: https://spontaneous-blancmange-9e6574.netlify.app/ 
 
 
 ## Built With
 
 * [React JS](https://reactjs.org/docs/getting-started.html) - The web framework used
+- [NPM](https://www.npmjs.com/) - The package manager for [Node](https://nodejs.org/)
+- [Material UI](https://mui.com/) - An open-source React component library
+- [Visual Studio Code](https://code.visualstudio.com/download) - source code editor 
+- [Google Chrome](https://www.google.com/intl/en_in/chrome/) - Browser used to visualize the changes
+- [Netlify](https://app.netlify.com/) - used for deployment of application.
 
 
 
