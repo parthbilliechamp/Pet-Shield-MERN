@@ -3,7 +3,6 @@
 * *Date Created*: 01 Feb 2023
 * *Last Modification Date*: 26 Feb 2023
 * *Git URL (main branch)*: https://git.cs.dal.ca/ppc/group_5_csci5709
-* *Git URL (branch)*: 
 
 
 ## Authors
