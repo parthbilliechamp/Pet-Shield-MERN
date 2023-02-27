@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Button, Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const ServiceCard = ({ name, image, description, link, feature, pagelink }) => {
