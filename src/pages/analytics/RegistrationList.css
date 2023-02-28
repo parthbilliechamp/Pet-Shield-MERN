@@ -1,0 +1,9 @@
+.registration-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .registration-list__fallback {
+    color: rgb(113, 169, 240);
+    text-align: center;
+  }
