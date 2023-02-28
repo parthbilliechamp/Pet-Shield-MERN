@@ -51,8 +51,6 @@ Following can be seen in the terminal:
 
 > Compiled successfully!
 
-> You can now view add_medical_records_task in the browser.
-
 >  Local:            http://localhost:3000
 >  On Your Network:  http://192.168.137.1:3000
 
@@ -75,9 +73,13 @@ Add additional notes about how to deploy this on a live system
 
 URL: https://spontaneous-blancmange-9e6574.netlify.app/ 
 
-Login as Pet Owner email: group5petowner@gmail.com
+### To log into the system use the below mentioned credentials
+
+Login as Pet Owner:
+email: group5petowner@gmail.com
 Password:Petowner@PetShield
-Login as veterinarian: group5vets@gmail.com
+Login as veterinarian:
+email: group5vets@gmail.com
 Password:Vets@PetShield
 
 
