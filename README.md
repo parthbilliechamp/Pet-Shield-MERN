@@ -1,7 +1,7 @@
 # Project Proposal 
 
 * *Date Created*: 01 Feb 2023
-* *Last Modification Date*: 26 Feb 2023
+* *Last Modification Date*: 28 Feb 2023
 * *Git URL (main branch)*: https://git.cs.dal.ca/ppc/group_5_csci5709
 
 
@@ -75,10 +75,10 @@ URL: https://spontaneous-blancmange-9e6574.netlify.app/
 
 ### To log into the system use the below mentioned credentials
 
-* Login as Pet Owner:
+Login as Pet Owner:
 - email: group5petowner@gmail.com
 - Password:Petowner@PetShield
-* Login as veterinarian:
+Login as veterinarian:
 - email: group5vets@gmail.com
 - Password:Vets@PetShield
 
