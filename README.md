@@ -74,6 +74,11 @@ Add additional notes about how to deploy this on a live system
 
 URL: https://spontaneous-blancmange-9e6574.netlify.app/ 
 
+Login as Pet Owner email: group5petowner@gmail.com
+Password:Petowner@PetShield
+Login as veterinarian: group5vets@gmail.com
+Password:Vets@PetShield
+
 
 ## Built With
 
