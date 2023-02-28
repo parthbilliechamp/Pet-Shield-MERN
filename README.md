@@ -29,6 +29,7 @@ npm install @mui/material @emotion/react @emotion/styled
 npm install @mui/icons-material
 npm install @mui/x-date-pickers
 npm install react-hook-form
+npm i react-chartjs-2 chart.js
 ```
 
 
@@ -114,6 +115,8 @@ The code above was created by adapting the code in [html5-tutorial](https://html
 - <!---Why---> [html5-tutorial](https://html5-tutorial.net/form-validation/validating-email/)'s Code was used because REGEX are already defined to validate particular patterns.
 - <!---How---> [html5-tutorial](https://html5-tutorial.net/form-validation/validating-email/)'s Code was modified by using it in the required conditions which were not mentioned on the source side.
 
+
+You can access the analytics module by visiting http://localhost:3000/analytics. This is because the admin dashboard is still being developed and this is part of the admin module. As a result, we are currently using the analytics module, but in the future, an admin dashboard will be created so that we can view it directly.
 
 Shivang used 2 images for HomePage.js
 

@@ -137,7 +137,7 @@ export default function Analytics() {
        
         </CardContent>
         <CardActions style={{ justifyContent: 'center' }}>
-        <Button variant="contained" sx={{width: '180px', height: '50px', fontSize:19 ,borderRadius:15}} onClick={buttonOneClicked}>View Statics</Button>
+        <Button variant="contained" sx={{width: '180px', height: '50px', fontSize:16 ,borderRadius:15}} onClick={buttonOneClicked}>View Statistics</Button>
         </CardActions>
       </Card>
       <Card sx={{ maxWidth: 1000 , marginLeft: '220px' , boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)' ,borderRadius:15}}>
@@ -156,7 +156,7 @@ export default function Analytics() {
           </Typography> */}
         </CardContent>
         <CardActions style={{ justifyContent: 'center' }}>
-        <Button variant="contained" sx={{width: '180px', height: '50px', fontSize:19 ,borderRadius:15}} onClick={buttonTwoClicked}>View Statics</Button>
+        <Button variant="contained" sx={{width: '180px', height: '50px', fontSize:16 ,borderRadius:15}} onClick={buttonTwoClicked}>View Statistics</Button>
         </CardActions>
       </Card>
     </div>}
