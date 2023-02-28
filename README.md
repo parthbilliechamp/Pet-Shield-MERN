@@ -11,7 +11,7 @@
 * [Jaivik Tailor (B00915987)](jv711224@dal.ca)
 * [Parth Champaneria (B00918132)](pr514457@dal.ca)
 * [Utsav Singh (B00923487)](ut796069@dal.ca) 
-* [Abhinav Singh (B00915090](abhinav.singh@dal.ca) 
+* [Abhinav Singh (B00915090)](abhinav.singh@dal.ca) 
 
 ## Getting Started
 
