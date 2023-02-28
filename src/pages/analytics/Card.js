@@ -1,4 +1,3 @@
-import RegistrationStats from "./RegistrationStats";
 import "./Card.css";
 
 function Card(props) {

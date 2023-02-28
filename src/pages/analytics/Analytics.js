@@ -100,7 +100,7 @@ const DUMMY_DATA = [
 export default function Analytics() {
 
 // declaring state and giving the inital value
-const [petInfo, setPetInfo] = useState(DUMMY_DATA);
+// const [petInfo, setPetInfo] = useState(DUMMY_DATA);
 // Right now I am not inserting a new data but hardcoring in the app.js file 
 // that is why setPetInfo is not used anywhere because we are working on inital value of state
 
@@ -162,8 +162,8 @@ const [petInfo, setPetInfo] = useState(DUMMY_DATA);
     </div>}
     
 
-    {buttonClicked === 'button1' && <RegistrationStats item={petInfo} />}
-    {buttonClicked === 'button2' && <PieChart item={petInfo} />}
+    {buttonClicked === 'button1' && <RegistrationStats item={DUMMY_DATA} />}
+    {buttonClicked === 'button2' && <PieChart item={DUMMY_DATA} />}
         
     </div>
   );

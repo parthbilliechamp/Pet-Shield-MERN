@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pie, Doughnut, Line } from 'react-chartjs-2';
+import { Doughnut} from 'react-chartjs-2';
 import { ArcElement } from 'chart.js'
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
