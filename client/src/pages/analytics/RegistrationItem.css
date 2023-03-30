@@ -1,0 +1,54 @@
+.registration-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  background-color: #e7e8f3;
+}
+
+.registration-item__date {
+  display: flex;
+  align-items: center;
+}
+
+.registration-item__description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.registration-item__petName {
+  font-size: 2.5rem;
+  margin: 0;
+  color: rgb(36, 37, 41);
+}
+
+.registration-item__ailmentName {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #698cdc;
+  border: 1px solid white;
+  padding: 0.5rem;
+  border-radius: 12px;
+}
+
+@media (min-width: 580px) {
+  .registration-item {
+    flex-direction: row;
+  }
+  
+  .registration-item__description {
+    flex: 1;
+    margin: 0 1rem;
+  }
+
+  .registration-item__ailmentName {
+    font-size: 1.25rem;
+    padding: 0.5rem 1.5rem;
+  }
+}

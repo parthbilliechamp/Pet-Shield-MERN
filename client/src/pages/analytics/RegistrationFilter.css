@@ -1,0 +1,33 @@
+.register-filter {
+  color: #141418;
+  padding: 0 1rem;
+}
+
+.register-filter__control {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.register-filter label {
+  font-size: 2rem;
+  flex: 1;
+  margin: 0 1rem;
+  color: #79a3e7;
+  text-align: center;
+  font-weight: bold;
+}
+
+.register-filter select {
+  font: inherit;
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  border-radius: 6px;
+  background-color: #5b81db;
+  color: #fff;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+}
