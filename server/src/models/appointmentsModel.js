@@ -10,7 +10,7 @@ const appointmentSchema = new mongoose.Schema({
   start_time: { type: String, required: true },
   end_time: { type: String, required: true },
   date: { type: String, required: true },
-  status: {type: String, required: true},
+  status: { type: String, required: true },
   vet: {
     _id: { type: ObjectId, required: true },
     first_name: { type: String, required: true },
@@ -44,7 +44,7 @@ const appointment = mongoose.model("appointments", appointmentSchema);
 
 //save appointment data in the database
 exports.bookAppointment = async (appointmentData) => {
-  appointmentData.status = 'confirm';
+  appointmentData.status = "confirm";
   const newAppointment = new appointment(appointmentData);
   const response = await newAppointment.save();
   return response;
@@ -72,9 +72,41 @@ exports.cancelAppointment = async (id) => {
 exports.getAppointmentsByPetOwnerId = async (petOwnerId) => {
   const result = await appointment
     .find({
-      "pet_owner._id" : petOwnerId,
+      "pet_owner._id": petOwnerId,
       //date: { $gte: new Date().toISOString().slice(0, 10) },
     })
     .sort({ date: 1 });
   return result;
+};
+
+//get list of appointments for a vet(utsav)
+exports.getAppointmentsByVetId = async (vetId, date) => {
+  const result = await appointment
+    .find({
+      "vet._id": new mongoose.Types.ObjectId(vetId),
+      status: "confirm",
+      date: date,
+    })
+    .sort({ date: 1 });
+  return result;
+};
+
+//cancel the appointment, searching the appointment by id(utsav)(user -vet)
+exports.cancelVetAppointment = async (id) => {
+  if (mongoose.Types.ObjectId.isValid(id)) {
+    appointment
+      .findByIdAndUpdate(
+        id, // _id value of the user to update
+        { $set: { status: "cancel" } },
+        { new: true }
+      )
+      .then((updatedappointment) => {
+        console.log(`Updated appointment: ${updatedappointment}`);
+      })
+      .catch((error) => {
+        console.error(`Error updating appointment: ${error}`);
+      });
+  } else {
+    console.error(`Invalid ObjectId: ${id}`);
+  }
 };

@@ -53,7 +53,7 @@ exports.getPetByOwnerEmail = async (req, res) => {
     }
 }
 
-//Controller to add or update the pets medical data
+//Controller to add or update the pets medical data and insurance data 
 exports.updatePet = async (req, res) => {
     const id = req.params.id;
     const updatedPetData = req.body
@@ -65,3 +65,17 @@ exports.updatePet = async (req, res) => {
         return res.status(500).json({ error: "Error while updating pet data." });
     }
 }
+
+exports.updatePetInsurance = async (req, res) => {
+    const id = req.params.id;
+    const updatedPetData = req.body
+    try {
+        const result = await petsModel.updatePetInsurance(id, updatedPetData);
+        return res.json({ result });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: "Error while updating pet data." });
+    }
+}
+
+

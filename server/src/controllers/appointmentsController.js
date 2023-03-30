@@ -91,3 +91,37 @@ exports.updateAppointment = async (req, res) => {
     return res.status(500).json({ error: "Error while updating appointment." });
   }
 };
+
+//controller which calls the appointments model to get the upcoming bookings requested by vet(utsav)
+exports.getAppointmentsByVetId = async (req, res) => {
+  const date = req.body.date;
+  const vetId = req.params.vetId;
+
+  if (!vetId) {
+    return res.status(400).json({ error: "Missing vetId in the request." });
+  }
+  try {
+    const upcomingAppointments = await appointmentsModel.getAppointmentsByVetId(
+      vetId,
+      date
+    );
+    return res.json({ upcomingAppointments });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ error: "Error while retrieving appointments." });
+  }
+};
+
+//controller which calls the appointments model to cancel the booking, if vet  wants to cancel the booking.(utsav)
+exports.cancelVetAppointmentsById = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result = await appointmentsModel.cancelVetAppointment(id);
+    return res.json({ result });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ error: "Error while cancelling appointment." });
+  }
+};
