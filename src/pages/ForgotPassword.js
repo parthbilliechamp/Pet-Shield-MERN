@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import { Button, Paper } from "@mui/material";
+import { Button, Paper, Link } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 
@@ -174,10 +174,13 @@ const ForgotPassword = () => {
                             </Button>
                         </Grid>
                         <Grid item xs={4} sm={4} md={4}>
+                            Do you want to login? <Link href="login" color={"#FF9800"} style={{ fontSize: 13 }}>Login Here</Link>
+                        </Grid>
+                        <Grid item xs={4} sm={4} md={4}>
                             {
                                 isValidateForm ?
                                     <Typography variant="h6" component="h6" color={"green"}>
-                                       Password  Changed Successfully!!
+                                        Password  Changed Successfully!!
                                     </Typography> : ""
                             }
                         </Grid>

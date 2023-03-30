@@ -28,10 +28,10 @@ const Login = () => {
     useEffect(()=>{
         
         if (isValidateForm) {
-                if (formValues.email.value === "group5petowner@gmail.com") {
+                if (formValues.email.value === "group5petowner@gmail.com" && formValues.password.value === "Petowner@PetShield") {
                     window.location.href = '/pet_owner_dashboard'; 
                 }
-                else if (formValues.email.value === "group5vets@gmail.com") {
+                else if (formValues.email.value === "group5vets@gmail.com" && formValues.password.value === "Vets@PetShield") {
                     window.location.href = '/vet_dashboard'; 
                 }
                 else {

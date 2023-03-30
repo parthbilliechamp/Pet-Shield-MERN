@@ -24,6 +24,8 @@ import AppointmentCalendar from "../pages/vet/Calendar";
 import AppointmentPage from "../pages/vet/AppointmentPage";
 import AppointmentDetails from "../pages/vet/AppointmentDetails";
 import ComingSoon from "../pages/ComingSoon";
+import Analytics from "../pages/analytics/Analytics";
+
 
 const AppRoutes = () => {
   return (
@@ -76,6 +78,10 @@ const AppRoutes = () => {
         <Route path="/appointmentdetails" element={<AppointmentDetails />} />
 
         <Route path="comingsoon" element={<ComingSoon />} />
+
+
+        {/* Admin */}
+        <Route path="/analytics" element={<Analytics />} />
 
       </Routes>
     </Router>
