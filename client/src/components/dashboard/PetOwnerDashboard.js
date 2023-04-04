@@ -22,7 +22,7 @@ export default function PetOwnerDashboard() {
   const theme = createTheme();
 
   useEffect(() => {
-    // checkUser();
+    checkUser();
   }, []);
 
   const checkUser = () => {

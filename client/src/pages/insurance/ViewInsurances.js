@@ -1,20 +1,26 @@
 import {
   Card,
-  Grid,
-  Typography,
   MenuItem,
   Select,
   InputLabel,
   FormControl,
-  Box,
   CardHeader,
-  CardContent,
-  Button,
+  CardContent
 } from "@mui/material";
+import React, { useEffect, useState } from 'react'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 import { styled } from "@mui/system";
-import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Rating from "@mui/lab/Rating";
+import PetOwnerSidebar from "../../components/common/PetOwnerSidebar";
+import PetOwnerNavbar from "../../components/common/PetOwnerNavbar";
 const BASE_URL = require("../../utils/url").default;
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -59,7 +65,9 @@ const ViewInsurances = () => {
     rating: "none",
   });
 
-  const [selectedPet, setSelectedPet] = useState(""); 
+  const theme = createTheme();
+
+  const [selectedPet, setSelectedPet] = useState("");
   const [ownerPets, setOwnerPets] = useState([]);
   const navigate = useNavigate();
 
@@ -67,6 +75,9 @@ const ViewInsurances = () => {
   console.log(userData.userDetails);
 
   useEffect(() => {
+
+    checkUser();
+
     Promise.all([
       fetch(`${BASE_URL}/petsByOwnerEmail`, {
         method: "POST",
@@ -92,8 +103,18 @@ const ViewInsurances = () => {
     }
   }, [ownerPets]);
 
-  console.log(ownerPets);
-  console.log(insurances);
+  const checkUser = () => {
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    if (userData === null) {
+      navigate('/login')
+    }
+    else {
+      const userType = userData.userType;
+      if (userType !== 'petowner') {
+        navigate('/login')
+      }
+    }
+  }
 
   const handleSortChange = (event) => {
     const { name, value } = event.target;
@@ -108,26 +129,26 @@ const ViewInsurances = () => {
       sortOrder.amount === "asc"
         ? parseInt(a.amount) - parseInt(b.amount)
         : sortOrder.amount === "desc"
-        ? parseInt(b.amount) - parseInt(a.amount)
-        : 0;
+          ? parseInt(b.amount) - parseInt(a.amount)
+          : 0;
     const coverageLimitOrder =
       sortOrder.coverageLimit === "asc"
         ? parseInt(a.coverage_limit) - parseInt(b.coverage_limit)
         : sortOrder.coverageLimit === "desc"
-        ? parseInt(b.coverage_limit) - parseInt(a.coverage_limit)
-        : 0;
+          ? parseInt(b.coverage_limit) - parseInt(a.coverage_limit)
+          : 0;
     const coveragePeriodOrder =
       sortOrder.coveragePeriod === "asc"
         ? a.coverage_period.localeCompare(b.coverage_period)
         : sortOrder.coveragePeriod === "desc"
-        ? b.coverage_period.localeCompare(a.coverage_period)
-        : 0;
+          ? b.coverage_period.localeCompare(a.coverage_period)
+          : 0;
     const ratingOrder =
       sortOrder.rating === "asc"
         ? parseFloat(a.rating) - parseFloat(b.rating)
         : sortOrder.rating === "desc"
-        ? parseFloat(b.rating) - parseFloat(a.rating)
-        : 0;
+          ? parseFloat(b.rating) - parseFloat(a.rating)
+          : 0;
 
     return (
       amountOrder || coverageLimitOrder || coveragePeriodOrder || ratingOrder
@@ -140,7 +161,7 @@ const ViewInsurances = () => {
     const petId = event.target.value;
     const selectedPet = ownerPets.find((pet) => pet._id === petId);
     setSelectedPet(selectedPet);
-   
+
   };
 
   const purchasedInsurance = (insurance) => {
@@ -155,124 +176,131 @@ const ViewInsurances = () => {
   }));
 
   return (
-    <>
-      <Box display="flex" justifyContent="center" marginBottom={2}>
-
-        <FormControl variant="outlined" margin="normal" sx={{ marginRight: 5 }}>
-          <InputLabel>Select Pet</InputLabel>
-          <Select
-            label="Select Pet"
-            value={selectedPet ? selectedPet._id : ""}
-            onChange={handlePetSelection}
-          >
-            prop here
-            {ownerPets.map((pet) => (
-              <MenuItem value={pet._id} key={pet._id}>
-                {pet.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <FormControl variant="outlined" margin="normal" sx={{ marginRight: 5 }}>
-          <InputLabel> Sort by Amount </InputLabel>
-          <Select
-            label="Sort by Amount"
-            name="amount"
-            value={sortOrder.amount || null} // Change this line
-            onChange={handleSortChange}
-          >
-            <MenuItem value="none"> Sort by Amount</MenuItem>
-            <MenuItem value="asc">Ascending</MenuItem>
-            <MenuItem value="desc">Descending</MenuItem>
-          </Select>
-        </FormControl>
-
-        <FormControl variant="outlined" margin="normal" sx={{ marginRight: 5 }}>
-          <InputLabel>Sort by Limit</InputLabel>
-          <Select
-            label="Sort by Limit"
-            name="coverageLimit"
-            value={sortOrder.coverageLimit}
-            onChange={handleSortChange}
-          >
-            <MenuItem value="none">
-              <em>Sort by Limit</em>
-            </MenuItem>
-            <MenuItem value="asc">Ascending</MenuItem>
-            <MenuItem value="desc">Descending</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl variant="outlined" margin="normal" sx={{ marginRight: 5 }}>
-          <InputLabel>Sort by Period</InputLabel>
-          <Select
-            label="Sort by Period"
-            name="coveragePeriod"
-            value={sortOrder.coveragePeriod}
-            onChange={handleSortChange}
-          >
-            <MenuItem value="none">
-              <em>Sort by Period</em>
-            </MenuItem>
-            <MenuItem value="asc">Ascending</MenuItem>
-            <MenuItem value="desc">Descending</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl variant="outlined" margin="normal">
-          <InputLabel>Sort by Rating</InputLabel>
-          <Select
-            label="Sort by Rating"
-            name="rating"
-            value={sortOrder.rating}
-            onChange={handleSortChange}
-          >
-            <MenuItem value="none">
-              <em>Sort by Rating</em>
-            </MenuItem>
-            <MenuItem value="asc">Ascending</MenuItem>
-            <MenuItem value="desc">Descending</MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
-      <StyledGrid container spacing={4}>
-        {sortedInsurances.map((insurance) => (
-          <Grid item xs={12} md={6} lg={4} key={insurance._id}>
-            <StyledCard>
-              <CardHeader title={insurance.insurance_name} />
-              <StyledCardContent>
-                <Typography variant="subtitle1" color="primary">
-                  ${insurance.amount}
-                </Typography>
-                <Typography variant="body2">
-                  Coverage Limit: ${insurance.coverage_limit}
-                </Typography>
-                <Typography variant="body2">
-                  Coverage Period: {insurance.coverage_period}
-                </Typography>
-                <Typography variant="body2">
-                  Provider: {insurance.insurance_provider}
-                </Typography>
-
-                <Rating
-                  name="insurance-rating"
-                  value={insurance.rating}
-                  precision={0.5}
-                  readOnly
-                />
-              </StyledCardContent>
-              <StyledButton
-                variant="contained"
-                color="primary"
-                onClick={() => purchasedInsurance(insurance)}
-                // disabled={buyNowDisabled}
+    <ThemeProvider theme={theme}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        {/* <Box display="flex" justifyContent="center" marginBottom={2}> */}
+        <CssBaseline />
+        <PetOwnerNavbar />
+        <PetOwnerSidebar />
+        <Container component="main" maxWidth="lg" sx={{ flexGrow: 1, p: 3, mt: 2, mb: 4 }}>
+          <Paper sx={{ mt: { xs: 6, md: 6 }, p: { xs: 2, md: 3 } }}>
+            <FormControl variant="outlined" margin="normal" sx={{ marginRight: 5 }}>
+              <InputLabel>Select Pet</InputLabel>
+              <Select
+                label="Select Pet"
+                value={selectedPet ? selectedPet._id : ""}
+                onChange={handlePetSelection}
               >
-                Buy Now
-              </StyledButton>
-            </StyledCard>
-          </Grid>
-        ))}
-      </StyledGrid>
-    </>
+                prop here
+                {ownerPets.map((pet) => (
+                  <MenuItem value={pet._id} key={pet._id}>
+                    {pet.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl variant="outlined" margin="normal" sx={{ marginRight: 5 }}>
+              <InputLabel> Sort by Amount </InputLabel>
+              <Select
+                label="Sort by Amount"
+                name="amount"
+                value={sortOrder.amount || null} // Change this line
+                onChange={handleSortChange}
+              >
+                <MenuItem value="none"> Sort by Amount</MenuItem>
+                <MenuItem value="asc">Ascending</MenuItem>
+                <MenuItem value="desc">Descending</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl variant="outlined" margin="normal" sx={{ marginRight: 5 }}>
+              <InputLabel>Sort by Limit</InputLabel>
+              <Select
+                label="Sort by Limit"
+                name="coverageLimit"
+                value={sortOrder.coverageLimit}
+                onChange={handleSortChange}
+              >
+                <MenuItem value="none">
+                  <em>Sort by Limit</em>
+                </MenuItem>
+                <MenuItem value="asc">Ascending</MenuItem>
+                <MenuItem value="desc">Descending</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl variant="outlined" margin="normal" sx={{ marginRight: 5 }}>
+              <InputLabel>Sort by Period</InputLabel>
+              <Select
+                label="Sort by Period"
+                name="coveragePeriod"
+                value={sortOrder.coveragePeriod}
+                onChange={handleSortChange}
+              >
+                <MenuItem value="none">
+                  <em>Sort by Period</em>
+                </MenuItem>
+                <MenuItem value="asc">Ascending</MenuItem>
+                <MenuItem value="desc">Descending</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl variant="outlined" margin="normal">
+              <InputLabel>Sort by Rating</InputLabel>
+              <Select
+                label="Sort by Rating"
+                name="rating"
+                value={sortOrder.rating}
+                onChange={handleSortChange}
+              >
+                <MenuItem value="none">
+                  <em>Sort by Rating</em>
+                </MenuItem>
+                <MenuItem value="asc">Ascending</MenuItem>
+                <MenuItem value="desc">Descending</MenuItem>
+              </Select>
+            </FormControl>
+            <StyledGrid container spacing={4}>
+              {sortedInsurances.map((insurance) => (
+                <Grid item xs={12} md={6} lg={4} key={insurance._id}>
+                  <StyledCard>
+                    <CardHeader title={insurance.insurance_name} />
+                    <StyledCardContent>
+                      <Typography variant="subtitle1" color="primary">
+                        ${insurance.amount}
+                      </Typography>
+                      <Typography variant="body2">
+                        Coverage Limit: ${insurance.coverage_limit}
+                      </Typography>
+                      <Typography variant="body2">
+                        Coverage Period: {insurance.coverage_period}
+                      </Typography>
+                      <Typography variant="body2">
+                        Provider: {insurance.insurance_provider}
+                      </Typography>
+
+                      <Rating
+                        name="insurance-rating"
+                        value={insurance.rating}
+                        precision={0.5}
+                        readOnly
+                      />
+                    </StyledCardContent>
+                    <StyledButton
+                      variant="contained"
+                      color="primary"
+                      onClick={() => purchasedInsurance(insurance)}
+                    // disabled={buyNowDisabled}
+                    >
+                      Buy Now
+                    </StyledButton>
+                  </StyledCard>
+                </Grid>
+              ))}
+            </StyledGrid>
+          </Paper>
+        </Container>
+      </Box>
+    </ThemeProvider>
   );
 };
 

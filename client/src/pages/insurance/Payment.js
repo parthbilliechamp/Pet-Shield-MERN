@@ -1,8 +1,19 @@
-import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { styled } from "@mui/system";
 import { useTheme } from "@mui/material/styles";
-import { Typography, Box, Paper, TextField, Button, Grid } from "@mui/material";
+import { TextField } from "@mui/material";
+import React, { useEffect, useState } from 'react'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Rating from "@mui/lab/Rating";
+import PetOwnerSidebar from "../../components/common/PetOwnerSidebar";
+import PetOwnerNavbar from "../../components/common/PetOwnerNavbar";
 const BASE_URL = require("../../utils/url").default;
 
 const Payment = () => {
@@ -105,98 +116,107 @@ const Payment = () => {
   console.log(location.state);
 
   return (
-    <>
-      <Box sx={{ padding: "20px" }}>
-        <Typography variant="h4" gutterBottom>
-          Payment
-        </Typography>
-        <Paper
-          sx={{
-            padding: "20px",
-            backgroundColor: "#f0f4f7",
-            borderRadius: "10px",
-          }}
-        >
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                error={errors.cardNumber}
-                id="cardNumber"
-                name="cardNumber"
-                label="Card number"
-                fullWidth
-                autoComplete="cc-number"
-                value={cardNumber}
-                onChange={(e) => setCardNumber(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                required
-                error={errors.expDate}
-                id="expDate"
-                name="expDate"
-                label="Expiry date"
-                fullWidth
-                autoComplete="cc-exp"
-                value={expDate}
-                onChange={(e) => setExpDate(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextField
-                required
-                error={errors.cvv}
-                id="cvv"
-                name="cvv"
-                label="CVV"
-                helperText="Last three digits on signature strip"
-                fullWidth
-                autoComplete="cc-csc"
-                value={cvv}
-                onChange={(e) => setCvv(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                error={errors.nameOnCard}
-                id="nameOnCard"
-                name="nameOnCard"
-                label="Name on card"
-                fullWidth
-                autoComplete="cc-name"
-                value={nameOnCard}
-                onChange={(e) => setNameOnCard(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} container justifyContent="center" spacing={2}>
-              <Grid item>
-                <FancyButton
-                  variant="contained"
-                  color="primary"
-                  onClick={handlePayNow}
-                  size="large"
-                >
-                  Pay
-                </FancyButton>
-              </Grid>
-              <Grid item>
-                <FancyButton
-                  variant="outlined"
-                  color="primary"
-                  onClick={() => console.log("Payment canceled")}
-                  size="large"
-                >
-                  Cancel
-                </FancyButton>
+    <ThemeProvider theme={theme}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <CssBaseline />
+        <PetOwnerNavbar />
+        <PetOwnerSidebar />
+        <Container component="main" maxWidth="lg" sx={{ flexGrow: 1, p: 3, mt: 2, mb: 4 }}>
+          <Paper sx={{ mt: { xs: 6, md: 6 }, p: { xs: 2, md: 3 } }}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sx={{ margin: 'auto' }}>
+                <Typography variant="h4" gutterBottom>
+                  Payment
+                </Typography>
               </Grid>
             </Grid>
-          </Grid>
-        </Paper>
+            <Paper
+              sx={{
+                padding: "20px"
+              }}
+            >
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    error={errors.cardNumber}
+                    id="cardNumber"
+                    name="cardNumber"
+                    label="Card number"
+                    fullWidth
+                    autoComplete="cc-number"
+                    value={cardNumber}
+                    onChange={(e) => setCardNumber(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    required
+                    error={errors.expDate}
+                    id="expDate"
+                    name="expDate"
+                    label="Expiry date"
+                    fullWidth
+                    autoComplete="cc-exp"
+                    value={expDate}
+                    onChange={(e) => setExpDate(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    required
+                    error={errors.cvv}
+                    id="cvv"
+                    name="cvv"
+                    label="CVV"
+                    helperText="Last three digits on signature strip"
+                    fullWidth
+                    autoComplete="cc-csc"
+                    value={cvv}
+                    onChange={(e) => setCvv(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    error={errors.nameOnCard}
+                    id="nameOnCard"
+                    name="nameOnCard"
+                    label="Name on card"
+                    fullWidth
+                    autoComplete="cc-name"
+                    value={nameOnCard}
+                    onChange={(e) => setNameOnCard(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12} container justifyContent="center" spacing={2}>
+                  <Grid item>
+                    <FancyButton
+                      variant="contained"
+                      color="primary"
+                      onClick={handlePayNow}
+                      size="large"
+                    >
+                      Pay
+                    </FancyButton>
+                  </Grid>
+                  <Grid item>
+                    <FancyButton
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => console.log("Payment canceled")}
+                      size="large"
+                    >
+                      Cancel
+                    </FancyButton>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Paper>
+          </Paper>
+        </Container>
       </Box>
-    </>
+    </ThemeProvider>
   );
 };
 
