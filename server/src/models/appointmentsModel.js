@@ -11,6 +11,7 @@ const appointmentSchema = new mongoose.Schema({
   end_time: { type: String, required: true },
   date: { type: String, required: true },
   status: { type: String, required: true },
+  time_slot_id: {type: ObjectId, required: true},
   vet: {
     _id: { type: ObjectId, required: true },
     first_name: { type: String, required: true },
@@ -81,6 +82,9 @@ exports.getAppointmentsByPetOwnerId = async (petOwnerId) => {
 
 //get list of appointments for a vet(utsav)
 exports.getAppointmentsByVetId = async (vetId, date) => {
+  console.log("in model");
+  console.log(vetId);
+  console.log(date);
   const result = await appointment
     .find({
       "vet._id": new mongoose.Types.ObjectId(vetId),
@@ -95,11 +99,7 @@ exports.getAppointmentsByVetId = async (vetId, date) => {
 exports.cancelVetAppointment = async (id) => {
   if (mongoose.Types.ObjectId.isValid(id)) {
     appointment
-      .findByIdAndUpdate(
-        id, // _id value of the user to update
-        { $set: { status: "cancel" } },
-        { new: true }
-      )
+      .findByIdAndUpdate(id, { $set: { status: "cancel" } }, { new: true })
       .then((updatedappointment) => {
         console.log(`Updated appointment: ${updatedappointment}`);
       })
@@ -110,3 +110,9 @@ exports.cancelVetAppointment = async (id) => {
     console.error(`Invalid ObjectId: ${id}`);
   }
 };
+
+//get the appointment by providing the appointment id.
+exports.getAppointmentById = async (id) => {
+  const appointmentData = await appointment.findById(id);
+    return appointmentData;
+}

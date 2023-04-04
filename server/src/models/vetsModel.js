@@ -13,7 +13,7 @@ const vetSchema = new mongoose.Schema({
   last_name: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  photo:{type : Buffer},
+  photo:{type : String},
   otp:{type : Number},
   phone: { type: String, required: true },
   // photo_url: { type: String },
@@ -29,18 +29,17 @@ const vetSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model("Vets", vetSchema);
+const vet = mongoose.model("Vets", vetSchema);
 
-const vet = mongoose.model("vets", vetSchema);
-
-//get the list of all the vets from the database
-exports.getVets = async () => {
-  const vetList = await vet.find({});
-  return vetList;
+module.exports = {
+  vet,
+getVets: async () => {
+    const vetList = await vet.find({});
+    return vetList;
+  },
+  getVetById: async (id) => {
+    const vetList = await vet.findById(id);
+    return vetList;
+  }
 };
 
-//get the vet by id from the database.
-exports.getVetById = async (id) => {
-  const vetList = await vet.findById(id);
-  return vetList;
-};

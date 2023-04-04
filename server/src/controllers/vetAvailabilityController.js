@@ -3,7 +3,7 @@
  */
 
 vetAvailabilityModel = require("../models/vetAvailabilityModel");
-
+//controller which calls the vetAvailabilityModel to get the availability for a vet
 exports.getAvailabilityByVetId = async (req, res) => {
   const vetId = req.params.vetId;
   const date = req.params.date;
@@ -26,8 +26,8 @@ exports.getAvailabilityByVetId = async (req, res) => {
   }
 };
 
+//controller which calls the vetAvailabilityModel to add an availability of the vet.
 exports.addAvailabilityByVetId = async (req, res) => {
-  console.log("inside controller");
   const vetId = req.params.vetId;
   const date = req.body.date;
   const vetObj = req.body.vets;
@@ -48,7 +48,7 @@ exports.addAvailabilityByVetId = async (req, res) => {
     );
   } catch (err) {
     return res.status(500).json({
-      error: "Error while retrieving availability for vet id : " + vetId,
+      error: "Error while adding availability for vet id : " + vetId,
     });
   }
 };
