@@ -9,12 +9,13 @@ import PieChart from "./PieChart";
 import petImage from "../../assets/images/pet 3.jpeg";
 import userImage from "../../assets/images/user3.svg";
 import Grid from "@mui/material/Grid";
+const BASE_URL = require("../../utils/url").default;
 
 export default function Analytics() {
   const [petInfo, setpetInfo] = useState("");
 
   useEffect(() => {
-    const url = `http://localhost:3001/pets`;
+    const url = `${BASE_URL}/pets`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
@@ -55,100 +56,6 @@ export default function Analytics() {
   };
 
   return (
-    // <div>
-    //   {buttonClicked === "notClicked" && (
-    //     <div
-    //       id="analytics"
-    //       style={{
-    //         display: "flex",
-    //         justifyContent: "center",
-    //         alignItems: "center",
-    //         marginTop: "100px",
-    //       }}
-    //     >
-          
-    //       <Card
-    //         sx={{
-    //           maxWidth: 1200,
-    //           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
-    //           borderRadius: 15,
-    //           width: 450,
-    //         }}
-    //       >
-    //         <CardMedia
-    //           sx={{
-    //             height: 300, // set desired height of CardMedia component
-    //             width: "100%", // set desired width of CardMedia component
-    //             objectFit: "cover", // set object-fit to cover to scale image while preserving aspect ratio
-    //           }}
-    //           image={petImage}
-    //           title="disease tracker"
-    //         />
-
-    //         {/* <CardContent sx={{ minWidth: 520 }}>
-    //           <Typography gutterBottom variant="h5" component="div">
-    //             Disease Tracker
-    //           </Typography>
-    //         </CardContent> */}
-
-    //         <CardActions style={{ justifyContent: "center" }}>
-    //           <Button
-    //             variant="contained"
-    //             sx={{
-    //               width: "180px",
-    //               height: "50px",
-    //               fontSize: 16,
-    //               borderRadius: 15,
-    //             }}
-    //             onClick={buttonOneClicked}
-    //           >
-    //             Disease Tracker
-    //           </Button>
-    //         </CardActions>
-    //       </Card>
-    //       <Card
-    //         sx={{
-    //           maxWidth: 1000,
-    //           marginLeft: "220px",
-    //           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
-    //           borderRadius: 15,
-    //           width: 450,
-    //         }}
-    //       >
-    //         <CardMedia
-    //           sx={{ height: 300 }} // increased height to 300
-    //           image={userImage}
-    //           title="pet registrations"
-    //         />
-
-    //         {/* <CardContent sx={{ minWidth: 520 }}>
-    //           <Typography gutterBottom variant="h5" component="div">
-    //             User Registrations
-    //           </Typography>
-              
-    //         </CardContent> */}
-    //         <CardActions style={{ justifyContent: "center" }}>
-    //           <Button
-    //             variant="contained"
-    //             sx={{
-    //               width: "180px",
-    //               height: "50px",
-    //               fontSize: 16,
-    //               borderRadius: 15,
-    //             }}
-    //             onClick={buttonTwoClicked}
-    //           >
-    //             User Registrations
-    //           </Button>
-    //         </CardActions>
-    //       </Card>
-
-    //     </div>
-    //   )}
-
-    //   {buttonClicked === "button1" && <RegistrationStats item={petInfo} />}
-    //   {buttonClicked === "button2" && <PieChart item={petInfo} />}
-    // </div>
     <div>
     {buttonClicked === "notClicked" && (
       <Grid

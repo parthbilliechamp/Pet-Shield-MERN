@@ -94,7 +94,8 @@ export default function VetSidebar() {
           <ListItem disablePadding>
             <ListItemButton
               onClick={() => {
-                navigate("something");
+                localStorage.removeItem('userData');
+                    navigate("/");
               }}
               selected={location.pathname.includes("/something")}
             >

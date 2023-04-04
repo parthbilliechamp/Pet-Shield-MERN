@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from '@mui/material/Paper';
@@ -9,12 +9,11 @@ import vetImg from "../assets/images/vet.png";
 import dogImg from "../assets/images/dog.png";
 import HomeNavbar from "../components/common/HomeNavbar";
 import ReviewsCarousal from "../components/homepage/ReviewsCarousal";
-
-//https://img.freepik.com/free-photo/party-dog_23-2147787331.jpg?w=1380&t=st=1677335551~exp=1677336151~hmac=9ad7a3cd934e49b805c7b249dc17c72cc0847d9521047b0f55c557eccbcff76b
-//https://img.freepik.com/free-photo/front-view-female-veterinarian-observing-little-dog-yellow-wall_179666-12493.jpg?w=996&t=st=1677334847~exp=1677335447~hmac=0be9f092d370e154f3f0952915ffaa745bf16bd7bc8aff9088b796c5ecfa5b47
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   const theme = createTheme();
+  const navigate = useNavigate();
 
   const Img = styled("img")({
     margin: "auto",
@@ -22,6 +21,23 @@ export default function HomePage() {
     width: "100%",
     height: "100%",
   });
+
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  const checkUser = () => {
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    if (userData !== null) {
+      const userType = userData.userType;
+      if (userType === 'petowner') {
+        navigate('/pet_owner_dashboard')
+      }
+      else if (userType === 'vet') {
+        navigate('/vet_dashboard')
+      }
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -67,8 +83,7 @@ export default function HomePage() {
               ml: { xs: 4, md: 10 },
             }}
           >
-            Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-            consectetur, adipisci velit...
+            Keep your pets free from diseases and with a glooming healthy paw future.
           </Typography>
         </Grid>
       </Grid>
@@ -109,8 +124,7 @@ export default function HomePage() {
               ml: { xs: 4, md: 10 },
             }}
           >
-            Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-            consectetur, adipisci velit...
+            Reach out to the best nearby available professionals that care for you and your pets health.
           </Typography>
         </Grid>
         <Grid xs={12} sm={6} justify="space-between" sx={{ margin: "auto" }}>

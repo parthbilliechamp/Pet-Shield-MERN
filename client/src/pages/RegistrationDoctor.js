@@ -17,6 +17,10 @@ const RegistrationDoctor = (props) => {
     console.log(file);
   };
 
+  useEffect(() => {
+    console.log(file);
+  }, [file]);
+
   const [formValues, setFormValues] = useState({
     firstName: {
       value: "",
@@ -97,6 +101,7 @@ const RegistrationDoctor = (props) => {
     })
   };
   const handleSubmit = () => {
+    console.log(file);
     const formData = new FormData();
     formData.append('email', formValues.email.value);
     formData.append('password', formValues.password.value);
@@ -111,11 +116,14 @@ const RegistrationDoctor = (props) => {
     formData.append('fees', formValues.fees.value);
     formData.append('rating', formValues.rating.value);
     formData.append('clinic_name', formValues.clinic_name.value);
+    const BASE_URL = require("../utils/url").default;
     
     formData.append('userType', 'vets');
     formData.append('photo', file);
     //console.log(email, password)
-    axios.post('http://localhost:5000/registration', formData, {
+    
+     axios.post(`${BASE_URL}registration`, formData,
+     {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -142,6 +150,7 @@ const RegistrationDoctor = (props) => {
     let isValidate = true;
 
     const ALPHABET_REGEX = /^[a-zA-Z]+$/;
+    const NUMBER_REGEX = /^[0-9]+$/
 
     let firstNameErrorMessage = formValues.firstName.value === "" ? "First Name is Required" :
       ALPHABET_REGEX.test(formValues.firstName.value) ? "" : "Field can contain only alphabets!"
@@ -167,7 +176,8 @@ const RegistrationDoctor = (props) => {
       },
     }));
 
-    let phoneErrorMessage = formValues.phone.value === "" ? "Phone Number is Required" : ""
+    let phoneErrorMessage = formValues.phone.value === "" ? "Phone Number is Required" : 
+    NUMBER_REGEX.test(formValues.phone.value) ? "" : "Field can contain only numbers!"
       // PHONE_REGEX.test(formValues.phone.value) ? "" : "Field can contain only numbers!"
     isValidate &= phoneErrorMessage === "";
 
@@ -217,7 +227,8 @@ const RegistrationDoctor = (props) => {
       },
     }));
 
-    let experienceErrorMessage = formValues.experience.value === "" ? "Experience is Required" : ""
+    let experienceErrorMessage = formValues.experience.value === "" ? "Experience is Required" : 
+    NUMBER_REGEX.test(formValues.experience.value) ? "" : "Field can contain only numbers!"
     isValidate &= experienceErrorMessage === "";
 
     setFormValues((formValues) => ({
@@ -251,7 +262,8 @@ const RegistrationDoctor = (props) => {
       },
     }));
 
-    let ratingErrorMessage = formValues.rating.value === "" ? "Rating is Required" : ""
+    let ratingErrorMessage = formValues.rating.value === "" ? "Rating is Required" : 
+    NUMBER_REGEX.test(formValues.rating.value) ? "" : "Field can contain only numbers!"
     isValidate &= ratingErrorMessage === "";
 
     setFormValues((formValues) => ({
@@ -262,7 +274,8 @@ const RegistrationDoctor = (props) => {
       },
     }));
 
-    let feesErrorMessage = formValues.fees.value === "" ? "Fees is Required" : ""
+    let feesErrorMessage = formValues.fees.value === "" ? "Fees is Required" : 
+    NUMBER_REGEX.test(formValues.fees.value) ? "" : "Field can contain only numbers!"
     isValidate &= feesErrorMessage === "";
 
     setFormValues((formValues) => ({
@@ -633,9 +646,9 @@ const RegistrationDoctor = (props) => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-            <input type="file" onChange={handleFileSelect} label =""/> 
+            <input type="file" onChange={handleFileSelect} /> 
               *Upload Profile Photo
-            </Grid>
+              </Grid>
             <br/>
             <br/>
             <br/>

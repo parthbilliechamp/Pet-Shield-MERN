@@ -75,7 +75,7 @@ export default function PetOwnerSidebar() {
             tag={<AssignmentIcon />}
           />
           <CustomListItem
-            to="/comingsoon"
+            to="/insurances"
             primary="Insurance"
             tag={<LoyaltyIcon />}
           />
@@ -91,8 +91,9 @@ export default function PetOwnerSidebar() {
         >
           <Divider sx={{ borderBottomWidth: 4 }} />
           <ListItemButton
-            tonClick={() => {
-              navigate("something");
+            onClick={() => {
+              localStorage.removeItem('userData');
+              navigate("/");
             }}
             selected={location.pathname.includes("/something")}
           >

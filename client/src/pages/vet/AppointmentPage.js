@@ -11,42 +11,35 @@ import axios from "axios";
 import VetSidebar from "../../components/common/VetSidebar";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+const BASE_URL = require("../../utils/url").default;
 
 const AppointmentPage = (props) => {
   const theme = createTheme();
   const location = useLocation();
   const [carddetails, setCardDetails] = useState(details);
   const [appointmentdetails, setAppointmentdetails] = useState([]);
-  const [vets, setVets] = useState([]);
+  const [vetid, setVetid] = useState(null);
 
   useEffect(() => {
-    const getVetData = async () => {
-      try {
-        const result = await axios.get("http://localhost:3001/vets");
-        setVets({ ...result.data.vets });
-      } catch (err) {}
-    };
-
-    getVetData();
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    setVetid(userData._id);
   }, []);
 
   useEffect(() => {
     const getData = async () => {
-      if (vets.length === 0) {
+      if (!vetid) {
         return;
       }
       try {
-        const result = await axios.post(
-          `http://localhost:3001/vetappointments/${vets[0]._id}`,
-          {
-            date: location.state?.datevalue.toDateString(),
-          }
-        );
+        const url = `${BASE_URL}vetappointments/${vetid}`;
+        const result = await axios.post(url, {
+          date: location.state?.datevalue.toDateString(),
+        });
         setAppointmentdetails([...result.data.upcomingAppointments]);
       } catch (err) {}
     };
     getData();
-  }, [vets]);
+  }, [vetid]);
 
   const cancelCardHandler = (id) => {
     const data = carddetails.filter((detail) => {

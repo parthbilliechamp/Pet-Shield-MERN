@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Row, Col } from "react-bootstrap";
 import "../../assets/styles/pet_owner/ClinicAndVetDetails.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -12,6 +11,12 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import PetOwnerSidebar from "../../components/common/PetOwnerSidebar";
 import Container from "@mui/material/Container";
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+
+const BASE_URL = require("../../utils/url").default;
+
 
 export default function TimeSlot() {
   const theme = createTheme();
@@ -24,6 +29,7 @@ export default function TimeSlot() {
   const [formattedDate, setFormattedDate] = useState();
 
   function formatDate(date) {
+    console.log(date.toDateString().replace(/ /g, "%20"));
     return date.toDateString().replace(/ /g, "%20");
   }
 
@@ -39,7 +45,7 @@ export default function TimeSlot() {
     } else {
       const vet_id = vet._id;
       const formattedDate = formatDate(date);
-      const url = `http://localhost:3001/availability/${vet_id}/${formattedDate}`;
+      const url = `${BASE_URL}availability/${vet_id}/${formattedDate}`;
       console.log(url);
       fetch(url)
         .then((response) => response.json())
@@ -51,7 +57,7 @@ export default function TimeSlot() {
             );
             setRenderTimeSlots(false);
           } else {
-            setTimeSlots(data.availability?.time_slots);
+            setTimeSlots(data.availability);
             setFormattedDate(date.toDateString());
             setErrorMessage("");
             setStartDate(date);
@@ -70,30 +76,59 @@ export default function TimeSlot() {
         <PetOwnerSidebar />
         <Container
           component="main"
-          maxWidth="lg"
+          maxWidth="md"
           sx={{ flexGrow: 1, p: 3, mt: 2 }}
         >
-          <div className="my-5">
-            <div className="card w-50 mx-auto">
-              <div className="card-body">
-                <Row>
-                  <Col xs={12} md={5}>
-                    <strong>Choose an appointment date :</strong>
-                  </Col>
-                  <Col xs={12} sm={7}>
-                    <div className="d-flex justify-content-center text-center mb-3">
-                      <DatePicker
-                        selected={startDate}
-                        onChange={(date) => handleOnchangeEvent(date)}
-                        placeholderText="Select a date other than today or yesterday"
-                      />
-                    </div>
-                  </Col>
-                </Row>
+          <Paper sx={{ mt: { xs: 6, md: 6 }, p: { xs: 2, md: 3 } }}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={5} sx={{ margin: 'auto' }}>
+                <Typography component="h1" variant="h6">
+                  <strong>Choose an appointment date :</strong>
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm={5} sx={{ margin: 'auto' }}>
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => handleOnchangeEvent(date)}
+                  placeholderText="Select a date other than today or yesterday"
+                />
+              </Grid>
+              <Grid item xs={12} sx={{ margin: 'auto' }}>
                 {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-              </div>
+              </Grid>
+            </Grid>
+            <hr />
+            <Grid container spacing={3}>
+              <Grid item xs={12} sx={{ margin: 'auto' }}>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} sm={5} sx={{ margin: 'auto' }}>
+                    <Typography component="h1" variant="h6">
+                      <b>Available time slots : </b>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={5} sx={{ margin: 'auto' }}>
+                  </Grid>
+                </Grid>
+              </Grid>
+              {renderTimeSlots && (
+                <Grid item xs={12} sx={{ margin: 'auto' }}>
+                  {timeSlots.map((time, index) => (
+                    <TimeSlotBox
+                      time={time.start_time}
+                      key={index}
+                      vet={vet}
+                      date={formattedDate}
+                      id={time._id}
+                    />
+                  ))}
+                </Grid>
+              )}
+            </Grid>
+          </Paper>
+          {/* <div className="my-5">
+            <div className="card w-50 mx-auto">
               <div className="card-header">
-                 <b>Available time slots : </b>
+                <b>Available time slots : </b>
               </div>
               <div className="card-body">
                 {renderTimeSlots && (
@@ -112,7 +147,7 @@ export default function TimeSlot() {
                 )}
               </div>
             </div>
-          </div>
+          </div> */}
         </Container>
       </Box>
     </ThemeProvider>

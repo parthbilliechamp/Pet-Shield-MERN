@@ -120,7 +120,8 @@ function PetOwnerNavbar() {
                 <Button
                   sx={{ my: 2, display: "block", color: "#1e69ba" }}
                   onClick={() => {
-                    navigate("/comingsoon");
+                    localStorage.removeItem('userData');
+                    navigate("/");
                   }}
                 >
                   LOGOUT

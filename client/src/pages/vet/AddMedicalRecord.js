@@ -16,6 +16,7 @@ import SuccessAlert from "../../components/pet_owner/SuccessAlert";
 import dateFormat from 'dateformat';
 import VetSidebar from '../../components/common/VetSidebar';
 
+const BASE_URL = require("../../utils/url.js").default;
 
 export default function AddMedicalRecord() {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -35,7 +36,7 @@ export default function AddMedicalRecord() {
         const todaysDate = dateFormat(new Date(), "yyyy-mm-dd")
         medicalData = Object.assign(medicalData, { "date_of_diagnosis": todaysDate })
         const data = Object.assign(petData, { "medical_record": medicalData })
-        const URL = `http://localhost:3001/${location.state._id}/addPetMedicalDetails`
+        const URL = `${BASE_URL}${location.state._id}/addPetMedicalDetails`
         fetch(URL, {
             method: "PUT",
             headers: {

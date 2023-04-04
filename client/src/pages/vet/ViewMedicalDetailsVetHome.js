@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -16,10 +16,28 @@ import VetNavBar from '../../components/common/VetNavbar';
 import { useForm } from 'react-hook-form';
 import VetSidebar from '../../components/common/VetSidebar';
 
+const BASE_URL = require("../../utils/url.js").default;
 
 export default function ViewMedicalDetailsVetHome() {
     const theme = createTheme();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        checkUser();
+    }, []);
+
+    const checkUser = () => {
+        const userData = JSON.parse(localStorage.getItem('userData'))
+        if (userData === null) {
+            navigate('/login')
+        }
+        else {
+            const userType = userData.userType;
+            if (userType !== 'vets') {
+                navigate('/login')
+            }
+        }
+    }
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -52,7 +70,7 @@ export default function ViewMedicalDetailsVetHome() {
     }
 
     const onSubmit = (data) => {
-        const URL = "http://localhost:3001/petsByOwnerEmail"
+        const URL = `${BASE_URL}petsByOwnerEmail`
         fetch(URL, {
             method: "POST",
             headers: {

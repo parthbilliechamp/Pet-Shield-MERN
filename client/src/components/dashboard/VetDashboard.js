@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -19,6 +19,23 @@ import { useNavigate } from "react-router-dom";
 export default function VetDashboard() {
   const navigate = useNavigate();
   const theme = createTheme();
+
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  const checkUser = () => {
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    if (userData === null) {
+      navigate('/login')
+    }
+    else {
+      const userType = userData.userType;
+      if (userType !== 'vets') {
+        navigate('/login')
+      }
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>

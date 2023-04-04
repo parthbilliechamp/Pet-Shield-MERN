@@ -12,8 +12,13 @@ import Paper from "@mui/material/Paper";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
+
+const BASE_URL = require("../../utils/url").default;
 
 const AvailabililtyForm = () => {
+  const navigate = useNavigate();
+
   const [date, setDate] = useState(new Date());
   const [starttime, setStarttime] = useState();
   const [endtime, setEndtime] = useState();
@@ -23,22 +28,40 @@ const AvailabililtyForm = () => {
 
   const [visible, setVisible] = useState(false);
   const theme = createTheme();
-  const [vets, setVets] = useState([]);
+  const [vet, setVet] = useState(null);
+  // const [vets, setVets] = useState([]);
 
   useEffect(() => {
-    const getVetData = async () => {
-      try {
-        const result = await axios.get("http://localhost:3001/vets");
-        setVets({ ...result.data.vets });
-      } catch (err) {}
-    };
+    //To check authorize valid loggedin user to this page
+    checkUser();
 
-    getVetData();
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    const vetData = {
+      _id: userData._id,
+      email: userData.email,
+      password: userData.password,
+      first_name: userData.first_name,
+      last_name: userData.last_name,
+    };
+    setVet(vetData);
   }, []);
+
+  const checkUser = () => {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    console.log(userData);
+    if (userData === null) {
+      navigate("/login");
+    } else {
+      const userType = userData.userType;
+      if (userType !== "vets") {
+        navigate("/login");
+      }
+    }
+  };
 
   const addSlot = (event) => {
     event.preventDefault();
-    const newSlot = { start_time: starttime, end_time: endtime };
+    const newSlot = { start_time: starttime, end_time: endtime, availability: 1 };
     setTimeslot((prevArray) => [...prevArray, newSlot]);
   };
 
@@ -50,15 +73,15 @@ const AvailabililtyForm = () => {
     } else {
       setMessage("Success");
       setSuccess(true);
-
+      console.log("vet id " + vet._id);
+      const url = `${BASE_URL}addavailability/${vet._id}`;
       var datestring = new Date(date);
       datestring = datestring.toDateString();
       axios
-        .post(`http://localhost:3001/addavailability/${vets[0]._id}`, {
+        .post(url, {
           date: datestring,
           slot: timeslot,
-          vets: vets[0],
-          // id: "641e161d69f30d5bfd21ce8
+          vets: vet,
         })
         .then(function (response) {})
         .catch(function (error) {});

@@ -16,6 +16,8 @@ import { useNavigate } from 'react-router-dom';
 import PetOwnerNavbar from '../../components/common/PetOwnerNavbar';
 import PetOwnerSidebar from '../../components/common/PetOwnerSidebar';
 
+const BASE_URL = require("../../../../client/src/utils/url").default;
+
 
 export default function ViewMedicalDetailsOwnerHome() {
 
@@ -37,8 +39,24 @@ export default function ViewMedicalDetailsOwnerHome() {
     }
 
     useEffect(() => {
+        //To check authorize valid loggedin user to this page
+        checkUser();
+
         getPets();
     }, []);
+
+    const checkUser = () => {
+        const userData = JSON.parse(localStorage.getItem('userData'))
+        if (userData === null) {
+            navigate('/login')
+        }
+        else {
+            const userType = userData.userType;
+            if (userType !== 'petowner') {
+                navigate('/login')
+            }
+        }
+    }
 
     const handleSearchChange = (e) => {
         e.preventDefault();
@@ -62,30 +80,27 @@ export default function ViewMedicalDetailsOwnerHome() {
     const getPets = () => {
 
         //TODO: Data to be fetched from session
-        const data = {
-            "_id": {
-                "$oid": "641fd9751e7561f41b50746e"
-            },
-            "email": "pet.owner@gmail.com",
-            "password": "pass",
-            "first_name": "Pet",
-            "last_name": "Owner",
-            "phone": "5542352354"
+        const userData = JSON.parse(localStorage.getItem('userData'))
+        if (userData === null) {
+            navigate('/login')
         }
+        else {
+            const petOwner = userData.userDetails;
 
-        const URL = "http://localhost:3001/petsByOwnerEmail"
-        fetch(URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setPetMedicalRecords(data.pets)
+            const URL = `${BASE_URL}petsByOwnerEmail`
+            fetch(URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(petOwner)
             })
-            .catch((error) => console.log(error))
+                .then((response) => response.json())
+                .then((data) => {
+                    setPetMedicalRecords(data.pets)
+                })
+                .catch((error) => console.log(error))
+        }
     }
 
     return (

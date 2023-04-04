@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import PetOwnerSidebar from '../../components/common/PetOwnerSidebar';
-import VetNavBar from '../../components/common/VetNavbar';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
@@ -19,14 +18,21 @@ import Stack from '@mui/material/Stack';
 import SearchIcon from '@mui/icons-material/Search';
 import { InputAdornment } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
+import PetOwnerNavbar from "../../components/common/PetOwnerNavbar";
+
+const BASE_URL = require("../../utils/url").default;
 
 function VetList() {
-  const url = "http://localhost:3001/vets";
+  const url = `${BASE_URL}vets`;
   const [vets, setVets] = useState([]);
   const [renderingVetList, setRenderingVetList] = useState(vets);
   const navigate = useNavigate();
 
   useEffect(() => {
+
+    //To check authorize valid loggedin user to this page
+    checkUser();
+
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
@@ -35,6 +41,19 @@ function VetList() {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  const checkUser = () => {
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    if (userData === null) {
+      navigate('/login')
+    }
+    else {
+      const userType = userData.userType;
+      if (userType !== 'petowner') {
+        navigate('/login')
+      }
+    }
+  }
 
   const handleOnClick = (vet) => {
     console.log("vet is : ");
@@ -84,7 +103,7 @@ function VetList() {
     <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <VetNavBar />
+        <PetOwnerNavbar />
         <PetOwnerSidebar />
         {/* Add this to keep space between nav and sidebar */}
         <Container
@@ -92,7 +111,7 @@ function VetList() {
           maxWidth="lg"
           sx={{ flexGrow: 1, p: 3, mt: 2, mb: 4 }}
         >
-          <Paper  sx={{ mt: { xs: 6, md: 6 }, p: { xs: 2, md: 3 } }}>
+          <Paper sx={{ mt: { xs: 6, md: 6 }, p: { xs: 2, md: 3 } }}>
             <Grid container spacing={3} sx={{ margin: { md: 'auto' } }}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -147,7 +166,7 @@ function VetList() {
                               }}>
                               <div className="img-holder">
                                 <img
-                                  src={vet.photo_url}
+                                  src={vet.photo}
                                   alt={vet.first_name}
                                   className="circular-image"
                                 />

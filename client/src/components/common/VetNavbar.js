@@ -120,6 +120,7 @@ function VetNavBar() {
                 <Button
                   sx={{ my: 2, display: "block", color: "#1e69ba" }}
                   onClick={() => {
+                    localStorage.removeItem('userData');
                     navigate("/");
                   }}
                 >

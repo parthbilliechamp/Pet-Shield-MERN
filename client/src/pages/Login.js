@@ -7,6 +7,7 @@ import Link from '@mui/material/Link';
 import Paper from "@mui/material/Paper";
 import axios from "axios";
 import Switch from '@mui/material/Switch';
+const BASE_URL = require("../utils/url").default;
 
 const Login = () => {
     const [formValues, setFormValues] = useState({
@@ -47,48 +48,31 @@ const Login = () => {
 
     };
 
-    // useEffect(() => {
-
-    //     if (isValidateForm) {
-    //         if (formValues.email.value === "group5petowner@gmail.com" && formValues.password.value === "Petowner@PetShield") {
-    //             window.location.href = '/pet_owner_dashboard';
-    //         }
-    //         else if (formValues.email.value === "group5vets@gmail.com" && formValues.password.value === "Vets@PetShield") {
-    //             window.location.href = '/vet_dashboard';
-    //         }
-    //         else {
-    //             setFormValues((formValues) => ({
-    //                 ...formValues,
-    //                 authentication: {
-    //                     errorMessage: "Unauthorized User",
-    //                 },
-    //             }));
-    //         }
-    //     }
-    //     setIsValidateForm(false);
-    // }, [isValidateForm, formValues]);
     const [checked, setChecked] = useState(false);
     const [userType, setUserType] = useState('petowner');
 
-    const handleSwitch = (event) => {
-        setChecked(event.target.checked);
+    const handleSwitch = async (event) => {
+        console.log(event.target.checked)
+        await setChecked(event.target.checked);
         if (event.target.checked) {
-            setUserType('vets');
+            await setUserType('vets');
+            //console.log(userType)
         } else {
-            setUserType('petowner');
+            await setUserType('petowner');
         }
     };
 
     const handleSubmit = () => {
+        console.log(userType);
         //console.log(email, password)
-        axios.post('http://localhost:5000/login',
+        axios.post(`${BASE_URL}login`,
             {
                 email: formValues.email.value,
                 password: formValues.password.value,
                 userType: userType
             })
             .then(res => {
-                console.log(res.data)
+                //console.log(res.data)
                 if (res.data.code === 500) {
                     alert('User Not Found')
                 }

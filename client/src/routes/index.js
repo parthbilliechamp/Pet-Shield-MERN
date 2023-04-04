@@ -24,6 +24,8 @@ import AppointmentPage from "../pages/vet/AppointmentPage";
 import AppointmentDetails from "../pages/vet/AppointmentDetails";
 import ComingSoon from "../pages/ComingSoon";
 import Analytics from "../pages/analytics/Analytics";
+import Payment from "../pages/insurance/Payment";
+import ViewInsurances from "../pages/insurance/ViewInsurances";
 
 const AppRoutes = () => {
   return (
@@ -87,6 +89,10 @@ const AppRoutes = () => {
 
         {/* Admin */}
         <Route path="/analytics" element={<Analytics />} />
+
+        {/* insurances */}
+        <Route path="/insurances" element={<ViewInsurances/>} />
+        <Route path="/insurance/:id" element={<Payment/>} />
       </Routes>
     </Router>
   );

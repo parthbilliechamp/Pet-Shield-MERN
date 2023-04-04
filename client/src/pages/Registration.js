@@ -6,8 +6,11 @@ import Typography from "@mui/material/Typography";
 import Link from '@mui/material/Link';
 import Stack from "@mui/material/Stack";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+const BASE_URL = require("../utils/url").default;
 
 const Registration = (props) => {
+  const navigate = useNavigate()
   const [formValues, setFormValues] = useState({
     firstName: {
       value: "",
@@ -18,6 +21,10 @@ const Registration = (props) => {
       errorMessage: ""
     },
     email: {
+      value: "",
+      errorMessage: ""
+    },
+    phone: {
       value: "",
       errorMessage: ""
     },
@@ -42,17 +49,19 @@ const Registration = (props) => {
 
   const handleSubmit = () => {
     //console.log(email, password)
-    axios.post('http://localhost:5000/registration',
+    axios.post(`${BASE_URL}registration`,
       {
         email: formValues.email.value,
         password: formValues.password.value,
         firstname: formValues.firstName.value,
         lastname: formValues.lastName.value,
+        phone: formValues.phone.value,
         userType: 'petowner'
       })
       .then(res => {
         console.log(res.data)
         if (res.data.Code === 200) {
+          navigate('/login')
           alert('Signup success.')
         } else {
           alert('Error.')
@@ -78,6 +87,7 @@ const Registration = (props) => {
     let isValidate = true;
 
     const ALPHABET_REGEX = /^[a-zA-Z]+$/;
+    const NUMBER_REGEX = /^[0-9]+$/
 
     let firstNameErrorMessage = formValues.firstName.value === "" ? "First Name is Required" :
       ALPHABET_REGEX.test(formValues.firstName.value) ? "" : "Field can contain only alphabets!"
@@ -100,6 +110,19 @@ const Registration = (props) => {
       lastName: {
         value: formValues.lastName.value,
         errorMessage: lastNameErrorMessage,
+      },
+    }));
+
+    let phoneErrorMessage = formValues.phone.value === "" ? "Phone Number is Required" : 
+    NUMBER_REGEX.test(formValues.phone.value) ? "" : "Field can contain only numbers!"
+      // PHONE_REGEX.test(formValues.phone.value) ? "" : "Field can contain only numbers!"
+    isValidate &= phoneErrorMessage === "";
+
+    setFormValues((formValues) => ({
+      ...formValues,
+      phone: {
+        value: formValues.phone.value,
+        errorMessage: phoneErrorMessage,
       },
     }));
 
@@ -231,6 +254,25 @@ const Registration = (props) => {
                     : true
                 }
                 helperText={formValues.lastName.errorMessage}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                id="phone"
+                name="phone"
+                label="Phone No"
+                type="text"
+                value={formValues.phone.value}
+                onChange={handleChange}
+                variant="outlined"
+                fullWidth
+                error={
+                  formValues.phone.errorMessage === ""
+                    ? false
+                    : true
+                }
+                helperText={formValues.phone.errorMessage}
               />
             </Grid>
             <Grid item xs={12} sm={6}>

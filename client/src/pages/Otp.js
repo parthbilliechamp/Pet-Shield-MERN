@@ -4,7 +4,8 @@ import TextField from "@mui/material/TextField";
 import { Button, Paper, Link } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+const BASE_URL = require("../utils/url").default;
 
 
 const Otp = () => {
@@ -35,10 +36,13 @@ const Otp = () => {
     };
 
     const handleSubmit = () => {
-        axios.post('http://localhost:5000/submit-otp',
+        const userType = JSON.parse(localStorage.getItem('userData'));
+        console.log(userType);
+        axios.post(`${BASE_URL}submit-otp`,
             {
                 otp: formValues.otp.value,
                 password: formValues.newPassword.value,
+                userType: userType
             })
             .then(res => {
                 console.log(res.data)

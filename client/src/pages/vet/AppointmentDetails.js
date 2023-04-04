@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import p4 from "../../assets/images/Profileimg/p4.jpg";
 import VetNavBar from "../../components/common/VetNavbar";
 import { useLocation } from "react-router-dom";
 import VetSidebar from "../../components/common/VetSidebar";
@@ -8,6 +7,8 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
+import profile from "../../assets/images/Profileimg/vectorprofile.jpg";
+import Grid from "@mui/material/Grid";
 
 const AppointmentDetails = () => {
   window.scrollTo(0, 0);
@@ -27,89 +28,99 @@ const AppointmentDetails = () => {
           sx={{ flexGrow: 1, p: 3, mt: 2, mb: 4 }}
         >
           <VetNavBar />
-          <AppointmentDetailsWrapper>
-            <div className="image">
-              <img alt="not found" src={p4}></img>
-            </div>
-            <div className="intro">
-              <div className="intro-card">
-                <h6 className="info-card">{location.state.first_name}</h6>
-                <h6 className="info-card">{location.state.last_name}</h6>
-                <h6 className="info-card">{location.state.email}</h6>
-                <h6 className="info-card">{location.state.phone}</h6>
-              </div>
-            </div>
-          </AppointmentDetailsWrapper>
+          <Container maxWidth="xl">
+            <Grid container spacing={5} style={{ height: "100%" }}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={12}
+                lg={12}
+                xl={12}
+                style={{ height: "100px" }}
+                sx={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <StyledProfile className="profile-wrapper">
+                  <div className="profile-top"></div>
+                  <div className="profile-img">
+                    <img src={profile} alt="profile_img" />
+                  </div>
+                  <div className="profile-details-wrapper">
+                    <div className="profile-details">
+                      <h4>
+                        {location.state.first_name} {location.state.last_name}
+                      </h4>
+                      <span>{location.state.email}</span>
+                      <span>{location.state.phone}</span>
+                    </div>
+                  </div>
+                </StyledProfile>
+              </Grid>
+            </Grid>
+          </Container>
         </Container>
       </Box>
     </ThemeProvider>
   );
 };
 
-const AppointmentDetailsWrapper = styled.div`
+const StyledProfile = styled.div`
+  width: 400px;
+  height: 500px;
+  border-radius: 60px;
+  margin: 0rem auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px 2px #ccc;
   display: flex;
-  box-shadow: 1px 1px 2px 2px rgb(204, 204, 204);
-  margin: auto;
-  width: 70%;
-  flex-wrap: wrap;
-  .image {
-    flex-basis: 50%;
+  flex-direction: column;
+  .profile-top {
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    background: linear-gradient(
+      360deg,
+      rgba(30, 105, 186, 1) 19%,
+      rgba(0, 212, 255, 1) 100%
+    );
+    border-radius: 60px;
+  }
+  .profile-img {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #ccc;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    overflow: hidden;
     img {
-      width: 90%;
-      margin: 5px auto;
-      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
   }
-  .intro {
+  .profile-details-wrapper {
     flex-basis: 50%;
-    display: flex;
-    flex-direction: column;
-
-    .intro-card {
-      box-shadow: 1px 1px 2px 2px rgb(204, 204, 204);
-      width: 50%;
-      margin: auto;
-      height: 90%;
-      border-radius: 5px;
-
-      .info-card {
-        box-shadow: 1px 1px 2px 2px rgb(204, 204, 204);
-        width: 85%;
-        margin: 10px auto;
-        border-radius: 5px;
-        padding: 5px;
+    margin-top: auto;
+    .profile-details {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: center;
+      gap: 1rem;
+      h4 {
+        font-size: 2rem;
       }
     }
   }
-
-  @media only screen and (min-width: 280px) and (max-width: 432px) {
-    .image {
-      flex-basis: 100%;
-      img {
-        width: 100%;
-        object-fit: cover;
-      }
-    }
-    .intro {
-      flex-basis: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-  }
-  @media only screen and (min-width: 432px) and (max-width: 1120px) {
-    .image {
-      flex-basis: 100%;
-      img {
-        width: 100%;
-        object-fit: cover;
-      }
-    }
-    .intro {
-      padding-top: 5%;
-      flex-basis: 100%;
-      display: flex;
-      flex-direction: column;
-    }
+  @media only screen and (max-width: 430px) {
+    width: 100%;
   }
 `;
 

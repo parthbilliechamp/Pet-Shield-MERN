@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Switch from '@mui/material/Switch';
-
+const BASE_URL = require("../utils/url").default;
 
 const ForgotPassword = () => {
     const navigate = useNavigate()
@@ -29,12 +29,14 @@ const ForgotPassword = () => {
     const [checked, setChecked] = useState(false);
     const [userType, setUserType] = useState('petowner');
 
-    const handleSwitch = (event) => {
-        setChecked(event.target.checked);
+    const handleSwitch = async (event) => {
+        console.log(event.target.checked)
+        await setChecked(event.target.checked);
         if (event.target.checked) {
-            setUserType('vets');
+            await setUserType('vets');
+            //console.log(userType)
         } else {
-            setUserType('petowner');
+            await setUserType('petowner');
         }
     };
 
@@ -45,31 +47,34 @@ const ForgotPassword = () => {
             [name]: { ...formValues[name], value }
         })
     };
+    const handleSubmit = () => {
+        // console.log(email)
+        console.log(formValues.email.value);
+        axios.post(`${BASE_URL}send-otp`,
+            {
+                email: formValues.email.value,
+                userType: userType
+            })
+            .then(res => {
+                console.log(res.data)
+                if (res.data.code === 200) {
+                    localStorage.setItem('userData', JSON.stringify(userType)) 
+                    navigate('/otp')
+                } else {
+                    alert('Email / Server Error.')
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+    }
+    
     useEffect(() => {
-        const handleSubmit = () => {
-            console.log(formValues.email.value);
-            axios.post('http://localhost:5000/send-otp',
-                {
-                    email: formValues.email.value,
-                    userType: userType
-                })
-                .then(res => {
-                    console.log(res.data)
-                    if (res.data.code === 200) {
-                        navigate('/otp')
-                    } else {
-                        alert('Email / Server Error.')
-                    }
-                }).catch(err => {
-                    console.log(err)
-                })
-        };
-        
         if (isValidateForm) {
             handleSubmit();
         }
-    }, [formValues.email.value, isValidateForm, navigate, userType]);
-    
+    }, [isValidateForm]);
+
+   
 
     const handleChangeWithValidate = (event) => {
         validate(event);

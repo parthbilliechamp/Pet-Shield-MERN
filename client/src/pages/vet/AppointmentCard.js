@@ -77,9 +77,6 @@ const AppointmentCard = (props) => {
           <Typography variant="h7" color="text.secondary" fontWeight={"bold"}>
             Slot: {props.start_time} - {props.end_time}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {props.email}
-          </Typography>
         </CardContent>
         <CardActions>
           <Button size="small" onClick={methodName}>

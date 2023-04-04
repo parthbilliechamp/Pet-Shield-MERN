@@ -1,7 +1,7 @@
 import Image1 from "../../assets/images/Vetimg/Image1.jpg";
 import Image7 from "../../assets/images/Vetimg/Image7.jpg";
 import PetOwnerNavbar from '../common/PetOwnerNavbar';
-import React from 'react'
+import React, { useEffect } from "react";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -18,41 +18,25 @@ import PetOwnerSidebar from '../common/PetOwnerSidebar';
 
 export default function PetOwnerDashboard() {
 
-  // const services = [
-  //   {
-  //     name: 'Book an Appointment',
-  //     image: Image1,
-  //     description: 'Book an Appointment with the available Vets.',
-  //     link: '/view_vets'
-  //   },
-  //   {
-  //     name: 'View Medical History',
-  //     image: Image2,
-  //     description: 'View and Manage medical history of the pet.',
-  //     link: '/mypets/medical_records'
-  //   },
-  //   {
-  //     name: 'Buy Pet Insurance',
-  //     image: Image6,
-  //     description: 'Choose from a wide range of insurance for your pet. ',
-  //     link: '/comingsoon'
-  //   },
-  //   {
-  //     name: 'Rating and Feedback',
-  //     image: Image5,
-  //     description: 'Leave a rating and give feedback for the Vet.',
-  //     link: '/comingsoon'
-  //   },
-  //   {
-  //     name: 'View Upcoming Appointments',
-  //     image: Image7,
-  //     description: 'View upcoming booking with the Vet.',
-  //     link: '/appointments'
-  //   },
-  // ];
-
   const navigate = useNavigate();
   const theme = createTheme();
+
+  useEffect(() => {
+    // checkUser();
+  }, []);
+
+  const checkUser = () => {
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    if (userData === null) {
+      navigate('/login')
+    }
+    else {
+      const userType = userData.userType;
+      if (userType !== 'petowner') {
+        navigate('/login')
+      }
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>

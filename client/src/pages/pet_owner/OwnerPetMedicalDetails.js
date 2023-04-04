@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import { useLocation } from 'react-router-dom'
 import Table from '@mui/material/Table';
 import TableCell from '@mui/material/TableCell';
@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from "react-router-dom";
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import html2canvas from 'html2canvas';
@@ -21,6 +22,25 @@ export default function OwnerPetMedicalDetails() {
 
     const theme = createTheme();
     const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        //To check authorize valid loggedin user to this page
+        checkUser();
+    }, []);
+
+    const checkUser = () => {
+        const userData = JSON.parse(localStorage.getItem('userData'))
+        if (userData === null) {
+            navigate('/login')
+        }
+        else {
+            const userType = userData.userType;
+            if (userType !== 'petowner') {
+                navigate('/login')
+            }
+        }
+    }
 
     const downloadFileDocument = (rootElementId, downloadFileName) => {
         const input = document.getElementById(rootElementId)
