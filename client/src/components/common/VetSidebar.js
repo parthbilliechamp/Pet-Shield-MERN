@@ -1,3 +1,7 @@
+/**
+ * @author Shivangkumar Gandhi
+ **/
+
 import * as React from "react";
 import { useLocation } from "react-router-dom";
 import Drawer from "@mui/material/Drawer";
@@ -95,7 +99,7 @@ export default function VetSidebar() {
             <ListItemButton
               onClick={() => {
                 localStorage.removeItem('userData');
-                    navigate("/");
+                navigate("/");
               }}
               selected={location.pathname.includes("/something")}
             >

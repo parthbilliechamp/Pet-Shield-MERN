@@ -1,5 +1,6 @@
 /**
  * @author Parth Champaneria
+ * @author Shivangkumar Gandhi
 */
 
 vetsModel = require("../models/vetsModel");
@@ -33,3 +34,42 @@ exports.getVetById = async (req, res) => {
     return res.status(500).json({ error: "Error while fetching vet." });
   }
 };
+
+//Controller which calls the vets model to get the list of vets to display it to the pet owner for booking appointment
+exports.getVetsByPendingStatus = async (req, res) => {
+  try {
+    const pendingVets = await vetsModel.getVetsByPendingStatus();
+    res.json({ pendingVets });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: "Error while fetching pending vets." });
+  }
+};
+
+//Controller to add or update the pets medical data and insurance data 
+exports.updateVetStatus = async (req, res) => {
+  const id = req.params.id;
+  const updatedVetStatus = req.body.profile.status
+  try {
+    const result = await vetsModel.updateVetStatus(id, updatedVetStatus);
+    return res.json({ result });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: "Error while updating vet status." });
+  }
+};
+
+//controller which calls the appointments model to cancel the booking, if pet owner wants to cancel the booking.
+exports.deleteVetProfile = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result = await vetsModel.deleteVetProfile(id);
+    return res.json({ result });
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(500)
+      .json({ error: "Error while deleting vet profile." });
+  }
+};
+

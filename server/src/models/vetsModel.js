@@ -1,7 +1,8 @@
 /**
  * @author Parth Champaneria
  * @author Jaivik Tailor
- */
+ * @author Shivangkumar Gandhi
+ **/
 
 const mongoose = require("mongoose");
 
@@ -13,8 +14,8 @@ const vetSchema = new mongoose.Schema({
   last_name: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  photo:{type : String},
-  otp:{type : Number},
+  photo: { type: String },
+  otp: { type: Number },
   phone: { type: String, required: true },
   // photo_url: { type: String },
   license_number: { type: String, required: true },
@@ -26,20 +27,34 @@ const vetSchema = new mongoose.Schema({
   rating: { type: Number, required: true },
   fees: { type: Number, required: true },
   clinic_name: { type: String, required: true },
-
+  status: { type: String, required: true }
 });
 
 const vet = mongoose.model("Vets", vetSchema);
 
 module.exports = {
   vet,
-getVets: async () => {
-    const vetList = await vet.find({});
+  getVets: async () => {
+    const vetList = await vet.find({ "status": "approved" });
     return vetList;
   },
   getVetById: async (id) => {
     const vetList = await vet.findById(id);
     return vetList;
+  },
+  getVetsByPendingStatus: async () => {
+    const vetList = await vet.find({ "status": "pending" });
+    return vetList;
+  },
+  updateVetStatus: async (id, updatedVetStatus) => {
+    const vetList = await vet.findByIdAndUpdate(id, { status: updatedVetStatus }, {
+      new: true,
+    });
+    return vetList;
+  },
+  deleteVetProfile: async (id) => {
+    const deletedVet = await vet.findByIdAndDelete(id);
+    return deletedVet;
   }
 };
 

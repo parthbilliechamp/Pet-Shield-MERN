@@ -1,6 +1,10 @@
+/**
+ * @author Jaivik Tailor
+ */
 const bcrypt = require("bcrypt");
 const petOwnerModel = require("../models/pet_ownerModel");
 const { vet, getVets, getVetById } = require("../models/vetsModel");
+const adminModel =require("../models/adminModel");
 const nodemailer = require("nodemailer");
 const multer = require("multer");
 const storage = multer.memoryStorage();
@@ -36,6 +40,33 @@ const store_image_on_s3_and_get_url = async (file) => {
   return s3Response.Location;
 };
 
+module.exports.adminLogin = (req,res) => {
+    adminModel.findOne({ email: req.body.email })
+      .then((user) => {
+        // Find the user by email
+        if (!user) {
+          // If user is not found, send error response
+          res.send({ code: 404, message: "User not found" });
+        } else {
+          if (req.body.password === user.password) {
+            // If the passwords match, send success response
+            res.send({
+              userDetails:user,
+              //email: user.email,
+              code: 200,
+              message: "User found",
+            });
+          } else {
+            // If passwords don't match, send error response
+            res.send({ code: 404, message: "Incorrect email or password" });
+          }
+        }
+      })
+      .catch((err) => {
+        // If there was an error, send error response
+        res.send({ code: 500, message: "Server error" });
+      });
+};  
 module.exports.register = async (req, res) => {
   console.log(req.body);
 
@@ -82,6 +113,7 @@ module.exports.register = async (req, res) => {
         fees: req.body.fees,
         rating: req.body.rating,
         clinic_name: req.body.clinic_name,
+        status: req.body.status,
         photo: s3_url,
       });
     }
@@ -370,23 +402,4 @@ module.exports.submitotp = (req, res) => {
   }
 };
 
-// const UserModel = require('../Models/user_registration')
-// module.exports.register = (req, res)  => {
-//    console.log(req.body);
-//     const newUser = new UserModel({
-//         email: req.body.email,
-//         firstname: req.body.firstname,
-//         lastname: req.body.lastname,
-//         //PhoneNo:req.body.PhoneNo,
-//         password:req.body.password
-//     })
-//     console.log(newUser);
-//     newUser.save().then(() => {
-//         res.send({Code : 200 , message: "Register Successfully"})
-//     })
-//     .catch((err) => {
-//         console.log(err);
-//         res.send({code: 500, message: "Registration Error" })
-//     })
 
-// }

@@ -1,5 +1,10 @@
+/**
+ * @author Shivangkumar Gandhi
+ **/
+
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -18,13 +23,16 @@ export default function AdminSidebar() {
     //TODO: Add respective links in sidebar
 
     const location = useLocation();
+    const navigate = useNavigate();
     const drawerWidth = 240;
 
     let CustomListItem = ({ to, primary, tag }) => (
         <ListItem disablePadding
         >
             <ListItemButton
-                to={to}
+                onClick={() => {
+                    navigate(to);
+                }}
                 selected={location.pathname.includes(to)}
             >
                 <ListItemIcon>
@@ -48,13 +56,16 @@ export default function AdminSidebar() {
             <Toolbar />
             <Box sx={{ overflow: 'auto', mt: 2, color: '#1e69ba' }}>
                 <List>
-                    <CustomListItem to="/something" primary='Analytics' tag={<BarChartIcon />} />
-                    <CustomListItem to="/something" primary='Vet Management' tag={<ManageAccountsIcon />} />
+                    <CustomListItem to="/analytics" primary='Analytics' tag={<BarChartIcon />} />
+                    <CustomListItem to="/admin_dashboard" primary='Vets Management' tag={<ManageAccountsIcon />} />
                 </List>
                 <List sx={{ position: 'absolute', bottom: 0, right: 0, left: 0, color: 'red' }}>
                     <Divider sx={{ borderBottomWidth: 4 }} />
                     <ListItemButton
-                        to={'/something'}
+                        onClick={() => {
+                            localStorage.removeItem('userData');
+                            navigate("/");
+                        }}
                         selected={location.pathname.includes('/something')}
                     >
                         <ListItemText primary={'Logout'} sx={{ ml: 1 }} />

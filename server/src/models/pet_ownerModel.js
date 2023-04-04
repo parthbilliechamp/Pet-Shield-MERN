@@ -1,3 +1,7 @@
+/**
+ * @author Jaivik Tailor
+ */
+
 const mongoose = require('mongoose')
 const petSchema = new mongoose.Schema({ 
   // _id: { type: ObjectId, required: true },

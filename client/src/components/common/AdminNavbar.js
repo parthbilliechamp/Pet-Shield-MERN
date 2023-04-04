@@ -1,3 +1,7 @@
+/**
+ * @author Shivangkumar Gandhi
+ **/
+
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -9,7 +13,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 export default function AdminNavbar() {
 
@@ -22,6 +27,8 @@ export default function AdminNavbar() {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
+
+    const navigate = useNavigate();
 
     return (
         <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} color="default" style={{ marginBottom: "20px" }}>
@@ -60,8 +67,9 @@ export default function AdminNavbar() {
                             <MenuItem sx={{ textAlign: 'center' }}>
                                 <Button
                                     sx={{ my: 2, display: "block", color: "#1e69ba" }}
-                                    component={Link}
-                                    to="/"
+                                    onClick={() => {
+                                        navigate("/analytics");
+                                    }}
                                 >
                                     Analytics
                                 </Button>
@@ -69,8 +77,9 @@ export default function AdminNavbar() {
                             <MenuItem>
                                 <Button
                                     sx={{ my: 2, display: "block", color: "#1e69ba" }}
-                                    component={Link}
-                                    to="/"
+                                    onClick={() => {
+                                        navigate("/admin_dashboard");
+                                    }}
                                 >
                                     Vet Management
                                 </Button>
@@ -78,8 +87,10 @@ export default function AdminNavbar() {
                             <MenuItem>
                                 <Button
                                     sx={{ my: 2, display: "block", color: "#1e69ba" }}
-                                    component={Link}
-                                    to="/"
+                                    onClick={() => {
+                                        localStorage.removeItem('userData');
+                                        navigate("/");
+                                    }}
                                 >
                                     LOGOUT
                                 </Button>

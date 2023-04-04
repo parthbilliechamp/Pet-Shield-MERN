@@ -1,3 +1,6 @@
+/**
+ * @author Jaivik Tailor
+ */
 import React, { useState,useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
@@ -119,6 +122,7 @@ const RegistrationDoctor = (props) => {
     const BASE_URL = require("../utils/url").default;
     
     formData.append('userType', 'vets');
+    formData.append('status', 'pending');
     formData.append('photo', file);
     //console.log(email, password)
     
@@ -357,11 +361,6 @@ const RegistrationDoctor = (props) => {
           padding: '30px 50px',
           textAlign: 'center',
         }}
-          // sx={{ flexGrow: 1, width: '50%' }}
-          // m={8}
-          // mb={5}
-          // bgcolor="white"
-          // style={{ padding: "30px 50px", margin: "50px auto" }}
 
         >
           <br/>
@@ -663,14 +662,14 @@ const RegistrationDoctor = (props) => {
             <Grid container justifyContent="center">
               Are you already registered user? <Link href="login" color={"#FF9800"} style={{ fontSize: 13 }}>Login Here</Link>
             </Grid>
-            <Grid item xs={4} sm={4} md={4}>
+            {/* <Grid item xs={4} sm={4} md={4}>
               {
                 isValidateForm ?
                   <Typography variant="h6" component="h6" color={"green"}>
                     User Registered Successfully as a Doctor
                   </Typography> : ""
               }
-            </Grid>
+            </Grid> */}
           </Grid>
         </Paper>
       </div>

@@ -1,3 +1,6 @@
+/**
+ * @author Jaivik Tailor
+ */
 import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
@@ -340,14 +343,14 @@ const Registration = (props) => {
             <Grid item xs={4} sm={4} md={4}>
               Are you already registered user? <Link href="login" color={"#FF9800"} style={{ fontSize: 13 }}>Login Here</Link>
             </Grid>
-            <Grid item xs={4} sm={4} md={4}>
+            {/* <Grid item xs={4} sm={4} md={4}>
               {
                 isValidateForm ?
                   <Typography variant="h6" component="h6" color={"green"}>
                     User Registered Successfully.
                   </Typography> : ""
               }
-            </Grid>
+            </Grid> */}
           </Grid>
         </Paper>
       </div>

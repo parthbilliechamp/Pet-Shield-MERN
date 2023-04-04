@@ -1,3 +1,7 @@
+/**
+ * @author Shivangkumar Gandhi
+ **/
+
 vetsController = require("../controllers/vetsController");
 petsController = require("../controllers/petsController");
 appointmentsController = require("../controllers/appointmentsController");
@@ -89,6 +93,7 @@ router.post("/cancelvetappointment/:id", (req, res) => {
 
 router.post("/registration", upload.single("photo"), userController.register);
 router.post("/login", userController.login);
+router.post("/adminlogin", userController.adminLogin);
 //app.post('/add-animals',sessionChecker, userController.addAnimalData)
 router.post("/submit-otp", userController.submitotp);
 router.post("/send-otp", userController.sendotp);
@@ -97,5 +102,20 @@ router.post("/send-otp", userController.sendotp);
 router.post("/addavailability/:vetId", (req, res) => {
   vetAvailabilityController.addAvailabilityByVetId(req, res);
 });
+
+//GET request to get pending vets
+router.get("/vetsByPendingRequests", (req, res) => {
+  vetsController.getVetsByPendingStatus(req, res);
+});
+
+//PUT request to change vet status
+router.put("/:id/updateVetStatus", (req, res) => {
+  vetsController.updateVetStatus(req, res);
+})
+
+//PUT request to delete vet profile
+router.delete("/:id/deleteVetProfile", (req, res) => {
+  vetsController.deleteVetProfile(req, res)
+})
 
 module.exports = router;

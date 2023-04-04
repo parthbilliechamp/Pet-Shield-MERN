@@ -1,3 +1,7 @@
+/**
+ * @author Shivangkumar Gandhi
+ **/
+
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import PetOwnerDashboard from "../components/dashboard/PetOwnerDashboard";
@@ -26,6 +30,12 @@ import ComingSoon from "../pages/ComingSoon";
 import Analytics from "../pages/analytics/Analytics";
 import Payment from "../pages/insurance/Payment";
 import ViewInsurances from "../pages/insurance/ViewInsurances";
+import AdminLogin from "../pages/AdminLogin";
+import AdminDashboard from "../components/dashboard/AdminDashboard";
+import PendingVetList from "../pages/admin/PendingVetList";
+import PendingVetProfilePage from "../pages/admin/PendingVetProfilePage";
+import ApprovedVetList from "../pages/admin/ApprovedVetList";
+import ApprovedVetProfilePage from "../pages/admin/ApprovedVetProfilePage";
 
 const AppRoutes = () => {
   return (
@@ -38,6 +48,7 @@ const AppRoutes = () => {
         <Route path="/registration" element={<Registration />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/registrationdoctor" element={<RegistrationDoctor />} />
+        <Route path="/adminlogin" element={<AdminLogin />} />
         <Route path="/otp" element={<Otp />} />
 
         {/* Pet Owner Dashboard */}
@@ -88,11 +99,16 @@ const AppRoutes = () => {
         <Route path="comingsoon" element={<ComingSoon />} />
 
         {/* Admin */}
+        <Route path="/admin_dashboard" element={<AdminDashboard />} />
+        <Route path="/pending_vets" element={<PendingVetList />} />
+        <Route path="/pending_vets/:id" element={<PendingVetProfilePage />} />
+        <Route path="/approved_vets" element={<ApprovedVetList />} />
+        <Route path="/approved_vets/:id" element={<ApprovedVetProfilePage />} />
         <Route path="/analytics" element={<Analytics />} />
 
         {/* insurances */}
-        <Route path="/insurances" element={<ViewInsurances/>} />
-        <Route path="/insurance/:id" element={<Payment/>} />
+        <Route path="/insurances" element={<ViewInsurances />} />
+        <Route path="/insurance/:id" element={<Payment />} />
       </Routes>
     </Router>
   );
