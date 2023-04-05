@@ -179,8 +179,8 @@ export default function Analytics() {
                 </Grid>
               </ThemeProvider>
             )}
-            {buttonClicked === "button1" && <RegistrationStats item={petInfo} />}
-            {buttonClicked === "button2" && <PieChart item={petInfo} />}
+            {buttonClicked === "button1" && <PieChart item={petInfo} />}
+            {buttonClicked === "button2" && <RegistrationStats item={petInfo} />}
           </Paper>
         </Container>
       </Box>
