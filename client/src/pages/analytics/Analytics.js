@@ -36,13 +36,14 @@ export default function Analytics() {
       .then((response) => response.json())
       .then((data) => {
         const petData = data.pets.map((pet) => {
-          const ownerName =
-            pet.pet_owner.first_name + " " + pet.pet_owner.last_name;
+          const ownerFirstName = pet?.pet_owner?.first_name ?? "";
+          const ownerLastName = pet?.pet_owner?.last_name ?? "";
+          const ownerName = ownerFirstName + " " + ownerLastName;
           return {
-            id: pet._id,
-            petName: pet.name,
+            id: pet?._id,
+            petName: pet?.name,
             ownerName: ownerName,
-            ailmentName: pet.medical_record?.diagnosis || "",
+            ailmentName: pet?.medical_record?.diagnosis || "",
             registrationDate: pet.medical_record?.date_of_diagnosis
               ? new Date(pet.medical_record.date_of_diagnosis)
               : null,
@@ -78,11 +79,13 @@ export default function Analytics() {
   const buttonOneClicked = (event) => {
     console.log("first clicked");
     setButtonClicked("button1");
+    console.log(petInfo);
   };
 
   const buttonTwoClicked = (event) => {
     console.log("2nd click");
     setButtonClicked("button2");
+    console.log(petInfo);
   };
 
   return (
@@ -179,6 +182,7 @@ export default function Analytics() {
                 </Grid>
               </ThemeProvider>
             )}
+            
             {buttonClicked === "button1" && <PieChart item={petInfo} />}
             {buttonClicked === "button2" && <RegistrationStats item={petInfo} />}
           </Paper>
