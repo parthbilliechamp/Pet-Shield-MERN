@@ -2,18 +2,19 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { styled } from "@mui/system";
 import { useTheme } from "@mui/material/styles";
 import { TextField } from "@mui/material";
-import React, { useEffect, useState } from 'react'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Rating from "@mui/lab/Rating";
+import React, { useState } from "react";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 import PetOwnerSidebar from "../../components/common/PetOwnerSidebar";
 import PetOwnerNavbar from "../../components/common/PetOwnerNavbar";
+import SuccessAlert from "../../components/pet_owner/SuccessAlert";
+
 const BASE_URL = require("../../utils/url").default;
 
 const Payment = () => {
@@ -33,6 +34,12 @@ const Payment = () => {
     nameOnCard: false,
   });
 
+  const [alert, setAlert] = useState(null);
+
+  const showAlert = (message, type) => {
+    setAlert({ message: message, type: type });
+  };
+
   const FancyButton = styled(Button)({
     backgroundColor: theme.palette.primary.main,
     color: "white",
@@ -45,10 +52,6 @@ const Payment = () => {
       backgroundColor: theme.palette.primary.dark,
     },
   });
-  const [alert, setAlert] = useState(null);
-  const showAlert = (message, type) => {
-    setAlert({ message: message, type: type });
-  };
 
   const handlePayNow = () => {
     if (!validateForm()) {
@@ -68,7 +71,10 @@ const Payment = () => {
       .then((response) => {
         if (response.status === 200) {
           showAlert("Insurances Sucessfully Added !!", "Success");
-          navigate("/insurances", { state: { responseStatus: alert } });
+          setTimeout(() => {
+            navigate("/insurances", { state: { responseStatus: alert } });
+          }, 1000);
+          // navigate("/insurances", { state: { responseStatus: alert } });
         } else {
           showAlert("Error: Unable to add insurance", "Error");
         }
@@ -117,14 +123,20 @@ const Payment = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Box
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
         <CssBaseline />
         <PetOwnerNavbar />
         <PetOwnerSidebar />
-        <Container component="main" maxWidth="lg" sx={{ flexGrow: 1, p: 3, mt: 2, mb: 4 }}>
+        <Container
+          component="main"
+          maxWidth="lg"
+          sx={{ flexGrow: 1, p: 3, mt: 2, mb: 4 }}
+        >
           <Paper sx={{ mt: { xs: 6, md: 6 }, p: { xs: 2, md: 3 } }}>
             <Grid container spacing={3}>
-              <Grid item xs={12} sx={{ margin: 'auto' }}>
+              <Grid item xs={12} sx={{ margin: "auto" }}>
                 <Typography variant="h4" gutterBottom>
                   Payment
                 </Typography>
@@ -132,7 +144,7 @@ const Payment = () => {
             </Grid>
             <Paper
               sx={{
-                padding: "20px"
+                padding: "20px",
               }}
             >
               <Grid container spacing={2}>
@@ -156,6 +168,7 @@ const Payment = () => {
                     id="expDate"
                     name="expDate"
                     label="Expiry date"
+                    helperText="MM/YY"
                     fullWidth
                     autoComplete="cc-exp"
                     value={expDate}
@@ -189,7 +202,13 @@ const Payment = () => {
                     onChange={(e) => setNameOnCard(e.target.value)}
                   />
                 </Grid>
-                <Grid item xs={12} container justifyContent="center" spacing={2}>
+                <Grid
+                  item
+                  xs={12}
+                  container
+                  justifyContent="center"
+                  spacing={2}
+                >
                   <Grid item>
                     <FancyButton
                       variant="contained"
@@ -212,6 +231,7 @@ const Payment = () => {
                   </Grid>
                 </Grid>
               </Grid>
+              {alert && <SuccessAlert alert={alert} />}
             </Paper>
           </Paper>
         </Container>
