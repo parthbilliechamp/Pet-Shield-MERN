@@ -53,6 +53,19 @@ const Payment = () => {
     },
   });
 
+  const cancelButton = () => {
+    // Clear the form
+    setCardNumber("");
+    setExpDate("");
+    setCvv("");
+    setNameOnCard("");
+  };
+
+  const handleBackButton = () => {
+    // Navigate to /insurances
+    navigate("/insurances");
+  };
+
   const handlePayNow = () => {
     if (!validateForm()) {
       console.log("Invalid form");
@@ -211,19 +224,29 @@ const Payment = () => {
                 >
                   <Grid item>
                     <FancyButton
+                      variant="outlined"
+                      color="primary"
+                      onClick={handleBackButton}
+                      size="large"
+                    >
+                      Back
+                    </FancyButton>
+                  </Grid>
+                  <Grid item>
+                    <FancyButton
                       variant="contained"
                       color="primary"
                       onClick={handlePayNow}
                       size="large"
                     >
-                      Pay
+                      Pay Now
                     </FancyButton>
                   </Grid>
                   <Grid item>
                     <FancyButton
                       variant="outlined"
                       color="primary"
-                      onClick={() => console.log("Payment canceled")}
+                      onClick={cancelButton}
                       size="large"
                     >
                       Cancel
