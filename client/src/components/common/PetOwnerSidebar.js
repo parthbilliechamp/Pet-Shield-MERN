@@ -54,13 +54,6 @@ export default function PetOwnerSidebar() {
     >
       <Toolbar />
       <Box sx={{ overflow: "auto", mt: 2, color: "#1e69ba" }}>
-        <List>
-          <CustomListItem
-            to="/comingsoon"
-            primary="Profile"
-            tag={<PersonIcon />}
-          />
-        </List>
         <Divider />
         <List>
           <CustomListItem
@@ -69,7 +62,7 @@ export default function PetOwnerSidebar() {
             tag={<CalendarMonthIcon />}
           />
           <CustomListItem
-            to="/comingsoon"
+            to="/view-pets"
             primary="My Pets"
             tag={<PetsIcon />}
           />
@@ -77,11 +70,6 @@ export default function PetOwnerSidebar() {
             to="/mypets/medical_records"
             primary="Pet Med Records"
             tag={<AssignmentIcon />}
-          />
-          <CustomListItem
-            to="/insurances"
-            primary="Insurance"
-            tag={<LoyaltyIcon />}
           />
         </List>
         <List

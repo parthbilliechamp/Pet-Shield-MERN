@@ -7,7 +7,7 @@ const ObjectId = mongoose.Types.ObjectId;
 
 //defining schema for the pets collection
 const petSchema = new mongoose.Schema({
-  _id: { type: ObjectId, required: true },
+ // _id: { type: ObjectId, required: true },
   type: { type: String, required: true },
   breed: { type: String, required: true },
   age: { type: Number, required: true },
@@ -15,30 +15,51 @@ const petSchema = new mongoose.Schema({
   gender: { type: String, required: true },
   name: { type: String, required: true },
   pet_owner: {
-    _id: { type: ObjectId, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
-    first_name: { type: String, required: true },
-    last_name: { type: String, required: true },
-    phone: { type: String, required: true },
+    _id: { type: ObjectId },
+    email: { type: String },
+    password: { type: String},
+    first_name: { type: String},
+    last_name: { type: String},
+    phone: { type: String},
   },
   medical_record: {
-    date_of_diagnosis: { type: String, required: true },
-    diagnosis: { type: String, required: true },
-    medical_prescriptions: { type: String, required: true },
-    pet_vaccines: { type: String, required: true },
+    date_of_diagnosis: { type: String },
+    diagnosis: { type: String },
+    medical_prescriptions: { type: String},
+    pet_vaccines: { type: String },
   },
   insurance: {
-    _id: { type: ObjectId, required: true },
-    name: { type: String, required: true },
-    amount: { type: String, required: true },
-    coverage_limit: { type: Number, required: true },
-    coverage_period: { type: String, required: true },
-    insurance_provider: { type: String, required: true },
+    _id: { type: ObjectId },
+    name: { type: String},
+    amount: { type: String},
+    coverage_limit: { type: Number},
+    coverage_period: { type: String},
+    insurance_provider: { type: String},
   },
 });
 
 const pet = mongoose.model("pets", petSchema);
+
+//add the list of all the pets to the database
+exports.addPets = async (req) => {
+  try {
+    
+    const petName = req.body.petName;
+    const petType = req.body.petType;
+    const petBreed = req.body.petBreed;
+    const petAge = req.body.petAge;
+    const petCertificateNumber = req.body.petCertificateNumber;
+    const petGender = req.body.petGender;
+    pet_owner = req.body.pet_owner;
+
+    const newPet = new pet({ name: petName, type: petType, breed:petBreed, age:petAge, 
+      certificate_number: petCertificateNumber, gender:petGender , pet_owner: pet_owner});
+    const savedPet = await newPet.save();
+    return savedPet;
+  } catch (err) {
+    throw err;
+  }
+};
 
 //get the list of all the pets from the database
 exports.getPets = async () => {
@@ -66,6 +87,11 @@ exports.updatePet = async (id, updatePetData) => {
   return result;
 };
 
+exports.deleteOne = async (id) => {
+  const deleteResult = await pet.deleteOne({ _id: id });
+  return deleteResult
+};
+
 //modify the pet details by adding or updating medical record
 exports.updatePetInsurance = async (id, updatedPetData) => {
   // Check if the insurance object exists in the request body
@@ -85,3 +111,4 @@ exports.updatePetInsurance = async (id, updatedPetData) => {
     return result;
   }
 };
+

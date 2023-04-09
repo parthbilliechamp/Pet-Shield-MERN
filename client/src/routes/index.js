@@ -36,6 +36,8 @@ import PendingVetList from "../pages/admin/PendingVetList";
 import PendingVetProfilePage from "../pages/admin/PendingVetProfilePage";
 import ApprovedVetList from "../pages/admin/ApprovedVetList";
 import ApprovedVetProfilePage from "../pages/admin/ApprovedVetProfilePage";
+import AddPets from "../pages/pet_owner/AddPets";
+import ViewAllPets from "../pages/pet_owner/ViewAllPets";
 
 const AppRoutes = () => {
   return (
@@ -52,6 +54,8 @@ const AppRoutes = () => {
         <Route path="/otp" element={<Otp />} />
 
         {/* Pet Owner Dashboard */}
+        <Route path="/add-pets" element={<AddPets />} />
+        <Route path="/view-pets" element={<ViewAllPets />} />
         <Route path="/pet_owner_dashboard" element={<PetOwnerDashboard />} />
         <Route path="/view_vets" element={<VetList />} />
         <Route path="/book" element={<ClinicAndVetDetails />} />

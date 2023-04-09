@@ -15,8 +15,6 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 
-//TODO: Add respective links in navbar
-
 function VetNavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 

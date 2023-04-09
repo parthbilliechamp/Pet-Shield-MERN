@@ -92,7 +92,7 @@ function PetOwnerNavbar() {
                 <Button
                   sx={{ my: 2, display: "block", color: "#1e69ba" }}
                   onClick={() => {
-                    navigate("/comingsoon");
+                    navigate("/view-pets");
                   }}
                 >
                   My Pets
