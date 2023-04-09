@@ -18,6 +18,8 @@ import AdminNavbar from '../../components/common/AdminNavbar';
 import AdminSidebar from '../../components/common/AdminSidebar';
 import SuccessAlert from '../../components/pet_owner/SuccessAlert';
 
+const BASE_URL = require("../../../../client/src/utils/url").default;
+
 
 export default function PendingVetProfilePage() {
 
@@ -49,7 +51,7 @@ export default function PendingVetProfilePage() {
         updatedVetData = Object.assign(updatedVetData, { "status": "approved" })
 
         //Update in db
-        const URL = `http://localhost:3001/${updatedVetData._id}/updateVetStatus`
+        const URL = `${BASE_URL}${updatedVetData._id}/updateVetStatus`
         fetch(URL, {
             method: "PUT",
             headers: {

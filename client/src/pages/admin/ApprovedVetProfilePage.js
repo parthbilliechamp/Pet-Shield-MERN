@@ -17,6 +17,7 @@ import { styled } from '@mui/material/styles';
 import AdminNavbar from '../../components/common/AdminNavbar';
 import AdminSidebar from '../../components/common/AdminSidebar';
 import SuccessAlert from '../../components/pet_owner/SuccessAlert';
+const BASE_URL = require("../../../../client/src/utils/url").default;
 
 export default function ApprovedVetProfilePage() {
 
@@ -46,7 +47,7 @@ export default function ApprovedVetProfilePage() {
         const vetDataToBeDeleted = element.profile
 
         //Delete profile in db
-        const URL = `http://localhost:3001/${vetDataToBeDeleted._id}/deleteVetProfile`
+        const URL = `${BASE_URL}${vetDataToBeDeleted._id}/deleteVetProfile`
         fetch(URL, {
             method: "DELETE",
             headers: {
