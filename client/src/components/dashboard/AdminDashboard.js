@@ -36,7 +36,7 @@ export default function AdminDashboard() {
         }
         else {
             const userType = userData.userType;
-            if (userType === null) {
+            if (userType !== null) {
                 if (userType === 'petowner' && userType === 'vets') {
                     navigate('/adminlogin')
                 }
