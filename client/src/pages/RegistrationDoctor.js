@@ -1,7 +1,7 @@
 /**
  * @author Jaivik Tailor
  */
-import React, { useState, useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { Button, Paper } from "@mui/material";
@@ -113,25 +113,25 @@ const RegistrationDoctor = (props) => {
     formData.append('phone', formValues.phone.value);
     formData.append('license_number', formValues.license_number.value);
     formData.append('qualification', formValues.qualification.value);
-    formData.append('experience', formValues.experience.value);
+    formData.append('experience', formValues.experience.value); 
     formData.append('clinic_license_number', formValues.clinic_license_number.value);
     formData.append('clinic_address', formValues.clinic_address.value);
     formData.append('fees', formValues.fees.value);
     formData.append('rating', formValues.rating.value);
     formData.append('clinic_name', formValues.clinic_name.value);
     const BASE_URL = require("../utils/url").default;
-
+    
     formData.append('userType', 'vets');
     formData.append('status', 'pending');
     formData.append('photo', file);
     //console.log(email, password)
-
-    axios.post(`${BASE_URL}registration`, formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
+    
+     axios.post(`${BASE_URL}registration`, formData,
+     {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
       .then(res => {
         console.log(res.data)
         if (res.data.Code === 200) {
@@ -181,9 +181,9 @@ const RegistrationDoctor = (props) => {
       },
     }));
 
-    let phoneErrorMessage = formValues.phone.value === "" ? "Phone Number is Required" :
-      ONLY_TEN_NUMBERS_REGEX.test(formValues.phone.value) ? "" : "Field can contain only 10 digits!"
-    // PHONE_REGEX.test(formValues.phone.value) ? "" : "Field can contain only numbers!"
+    let phoneErrorMessage = formValues.phone.value === "" ? "Phone Number is Required" : 
+    ONLY_TEN_NUMBERS_REGEX.test(formValues.phone.value) ? "" : "Field can contain only 10 digits!"
+      // PHONE_REGEX.test(formValues.phone.value) ? "" : "Field can contain only numbers!"
     isValidate &= phoneErrorMessage === "";
 
     setFormValues((formValues) => ({
@@ -209,7 +209,7 @@ const RegistrationDoctor = (props) => {
       },
     }));
 
-    let licenseNumberErrorMessage = formValues.license_number.value === "" ? "license Number is Required" : ""
+    let licenseNumberErrorMessage = formValues.license_number.value === "" ? "license Number is Required" :""
     isValidate &= licenseNumberErrorMessage === "";
 
     setFormValues((formValues) => ({
@@ -232,8 +232,8 @@ const RegistrationDoctor = (props) => {
       },
     }));
 
-    let experienceErrorMessage = formValues.experience.value === "" ? "Experience is Required" :
-      NUMBER_REGEX.test(formValues.experience.value) ? "" : "Field can contain only numbers!"
+    let experienceErrorMessage = formValues.experience.value === "" ? "Experience is Required" : 
+    NUMBER_REGEX.test(formValues.experience.value) ? "" : "Field can contain only numbers!"
     isValidate &= experienceErrorMessage === "";
 
     setFormValues((formValues) => ({
@@ -245,7 +245,7 @@ const RegistrationDoctor = (props) => {
     }));
 
     let clinicLNErrorMessage = formValues.clinic_license_number.value === "" ? "Clinic License Number is Required" : ""
-
+     
     isValidate &= clinicLNErrorMessage === "";
 
     setFormValues((formValues) => ({
@@ -255,7 +255,7 @@ const RegistrationDoctor = (props) => {
         errorMessage: clinicLNErrorMessage,
       },
     }));
-
+    
     let clinicAddressErrorMessage = formValues.clinic_address.value === "" ? "Clinic Address is Required" : ""
     isValidate &= clinicAddressErrorMessage === "";
 
@@ -267,8 +267,8 @@ const RegistrationDoctor = (props) => {
       },
     }));
 
-    let ratingErrorMessage = formValues.rating.value === "" ? "Rating is Required" :
-      NUMBER_REGEX.test(formValues.rating.value) ? "" : "Field can contain only numbers!"
+    let ratingErrorMessage = formValues.rating.value === "" ? "Rating is Required" : 
+    NUMBER_REGEX.test(formValues.rating.value) ? "" : "Field can contain only numbers!"
     isValidate &= ratingErrorMessage === "";
 
     setFormValues((formValues) => ({
@@ -279,8 +279,8 @@ const RegistrationDoctor = (props) => {
       },
     }));
 
-    let feesErrorMessage = formValues.fees.value === "" ? "Fees is Required" :
-      NUMBER_REGEX.test(formValues.fees.value) ? "" : "Field can contain only numbers!"
+    let feesErrorMessage = formValues.fees.value === "" ? "Fees is Required" : 
+    NUMBER_REGEX.test(formValues.fees.value) ? "" : "Field can contain only numbers!"
     isValidate &= feesErrorMessage === "";
 
     setFormValues((formValues) => ({
@@ -290,7 +290,7 @@ const RegistrationDoctor = (props) => {
         errorMessage: feesErrorMessage,
       },
     }));
-
+    
     let clinicNameErrorMessage = formValues.clinic_name.value === "" ? "Clinic Name is Required" : ""
     isValidate &= clinicNameErrorMessage === "";
 
@@ -301,7 +301,7 @@ const RegistrationDoctor = (props) => {
         errorMessage: clinicNameErrorMessage,
       },
     }));
-
+    
     const passwordRegex = /^[a-zA-Z0-9!@#$%^&*)(+=._-]*$/;
 
     let passwordErrorMessage = formValues.password.value === "" ?
@@ -355,20 +355,20 @@ const RegistrationDoctor = (props) => {
       }}></div>
       <div>
         <Paper
-          sx={{
-            flexGrow: 1,
-            maxWidth: '800px',
-            margin: '50px auto',
-            padding: '30px 50px',
-            textAlign: 'center',
-          }}
+        sx={{
+          flexGrow: 1,
+          maxWidth: '800px',
+          margin: '50px auto',
+          padding: '30px 50px',
+          textAlign: 'center',
+        }}
 
         >
-          <br />
-
+          <br/>
+          
           {/* alignItems="center" justifyContent="flex-end" direction="column" */}
           <Grid container spacing={3} >
-
+            
             <Grid container justifyContent="center" >
               <Typography variant="h4" color="#2196F3" component="h4">
                 Registration
@@ -379,7 +379,7 @@ const RegistrationDoctor = (props) => {
                 Are you a Pet Owner?<Link href="./registration" color={"#FF9800"} style={{ fontSize: 13 }}>Register Here</Link>
               </Stack>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item  xs={12} sm={6}>
               <TextField
                 required
                 id="firstName"
@@ -553,6 +553,25 @@ const RegistrationDoctor = (props) => {
             <Grid item xs={12} sm={6}>
               <TextField
                 required
+                id="rating"
+                name="rating"
+                label="Rating"
+                type="text"
+                value={formValues.rating.value}
+                onChange={handleChange}
+                variant="outlined"
+                fullWidth
+                error={
+                  formValues.rating.errorMessage === ""
+                    ? false
+                    : true
+                }
+                helperText={formValues.rating.errorMessage}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
                 id="fees"
                 name="fees"
                 label="Fees"
@@ -627,19 +646,19 @@ const RegistrationDoctor = (props) => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <input type="file" onChange={handleFileSelect} />
+            <input type="file" onChange={handleFileSelect} /> 
               *Upload Profile Photo
-            </Grid>
-            <br />
-            <br />
-            <br />
-            <br />
-            <Grid container justifyContent="center" >
-              <Grid item>
-                <Button variant="contained" onClick={handleChangeWithValidate}>
-                  Submit
-                </Button>
               </Grid>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <Grid container justifyContent="center" >
+            <Grid item>
+              <Button variant="contained" onClick={handleChangeWithValidate}>
+                Submit
+              </Button>
+              </Grid> 
             </Grid>
             <Grid container justifyContent="center">
               Are you already registered user? <Link href="login" color={"#FF9800"} style={{ fontSize: 13 }}>Login Here</Link>
