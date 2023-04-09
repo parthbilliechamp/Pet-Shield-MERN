@@ -71,6 +71,11 @@ export default function PetOwnerSidebar() {
             primary="Pet Med Records"
             tag={<AssignmentIcon />}
           />
+          <CustomListItem
+            to="/insurances"
+            primary="Insurance"
+            tag={<LoyaltyIcon />}
+          />
         </List>
         <List
           sx={{
