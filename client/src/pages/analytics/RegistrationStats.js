@@ -6,7 +6,6 @@ import RegistrationChart from "./RegistrationChart";
 import RegistrationFilter from "./RegistrationFilter";
 import RegistrationList from "./RegistrationList";
 
-
 const RegistrationStats = (props) => {
   // Here We are using state for storing filteredYear
   // initially I am storing 2020 year in the dropdown but the state will change as
@@ -21,11 +20,15 @@ const RegistrationStats = (props) => {
   };
 
   // filtered pet information object on the bases of selection of year
-  const filterPetInfo = props.item.filter((petInfo) => {
-    const registrationDate = petInfo.registrationDate;
-    return registrationDate && registrationDate.getFullYear().toString() === filteredYear;
-  });
-  
+  const filterPetInfo = Array.isArray(props.item)
+    ? props.item.filter((petInfo) => {
+        const registrationDate = petInfo.registrationDate;
+        return (
+          registrationDate &&
+          registrationDate.getFullYear().toString() === filteredYear
+        );
+      })
+    : [];
 
   // print filtered pet objects by selcted year
   // console.log(filterPetInfo + "filterPetInfo");
@@ -48,7 +51,6 @@ const RegistrationStats = (props) => {
       <RegistrationChart petRegistration={filterPetInfo} />
 
       <RegistrationList items={filterPetInfo}></RegistrationList>
-     
     </Card>
   );
 };
