@@ -8,7 +8,6 @@ import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Paper } from "@mui/material";
 import VetNavBar from "../../components/common/VetNavbar";
-import VetSidebar from "../../components/common/VetSidebar";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -34,7 +33,6 @@ export default function AppointmentCalendar() {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <VetNavBar />
-        <VetSidebar />
         <Container
           component="main"
           maxWidth="md"

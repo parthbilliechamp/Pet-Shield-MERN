@@ -56,32 +56,19 @@ export default function VetSidebar() {
       <Box sx={{ overflow: "auto", mt: 2, color: "#1e69ba" }}>
         <List>
           <CustomListItem
-            to="/comingsoon"
-            primary="Profile"
-            tag={<PersonIcon />}
-          />
-        </List>
-        <Divider />
-        <List>
-          <CustomListItem
             to="/vet_dashboard"
             primary="Appointments"
             tag={<CalendarMonthIcon />}
           />
           <CustomListItem
             to="/add_availability"
-            primary="Availibility"
+            primary="Availability"
             tag={<AddTaskIcon />}
           />
           <CustomListItem
             to="/medical_records"
             primary="Pet Med Records"
             tag={<AssignmentIcon />}
-          />
-          <CustomListItem
-            to="/comingsoon"
-            primary="Ratings & Feedback"
-            tag={<ReviewsIcon />}
           />
         </List>
         <List
@@ -94,11 +81,10 @@ export default function VetSidebar() {
           }}
         >
           <Divider sx={{ borderBottomWidth: 4 }} />
-          {/* <CustomListItem to="/something" primary='Logout' tag={<StartIcon />} /> */}
           <ListItem disablePadding>
             <ListItemButton
               onClick={() => {
-                localStorage.removeItem('userData');
+                localStorage.removeItem("userData");
                 navigate("/");
               }}
               selected={location.pathname.includes("/something")}

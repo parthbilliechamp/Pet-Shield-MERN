@@ -2,7 +2,24 @@
  * @author Shivangkumar Gandhi
 **/
 
-petsModel = require('../models/petsModel.js')
+petsModel = require('../models/petsModel.js');
+
+
+//Controller which calls the pets model to add pets.
+exports.addPetsData = async (req, res) => {
+    // res.send({
+    //   code: 200,
+    //   message: "Animal Added",
+    //   token: "hfgdhg",
+    // });
+    try {
+        const pets = await petsModel.addPets(req);
+        res.status(200).json({ pets });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: "Error while adding pets." });
+    }
+  };
 
 //Controller which calls the pets model to get the list of pets to display it to the pet owner for booking appointment
 exports.getPets = async (req, res) => {
@@ -75,6 +92,21 @@ exports.updatePetInsurance = async (req, res) => {
     } catch (err) {
         console.log(err);
         return res.status(500).json({ error: "Error while updating pet data." });
+    }
+}
+
+exports.deletePetRecord = async (req, res) => {
+    const petId = req.params.id;
+    try {
+        const deleteResult = await petsModel.deleteOne( petId );
+        if (deleteResult.deletedCount === 1) {
+            return res.status(200).json({ message: "Pet deleted successfully" });
+        } else {
+            return res.status(404).json({ error: "Pet not found" });
+        }
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: "Error while deleting pet" });
     }
 }
 

@@ -154,7 +154,8 @@ const RegistrationDoctor = (props) => {
     let isValidate = true;
 
     const ALPHABET_REGEX = /^[a-zA-Z]+$/;
-    const NUMBER_REGEX = /^[0-9]+$/
+    const NUMBER_REGEX = /^[0-9]+$/;
+    const ONLY_TEN_NUMBERS_REGEX = /^[0-9]{10}$/;
 
     let firstNameErrorMessage = formValues.firstName.value === "" ? "First Name is Required" :
       ALPHABET_REGEX.test(formValues.firstName.value) ? "" : "Field can contain only alphabets!"
@@ -181,7 +182,7 @@ const RegistrationDoctor = (props) => {
     }));
 
     let phoneErrorMessage = formValues.phone.value === "" ? "Phone Number is Required" : 
-    NUMBER_REGEX.test(formValues.phone.value) ? "" : "Field can contain only numbers!"
+    ONLY_TEN_NUMBERS_REGEX.test(formValues.phone.value) ? "" : "Field can contain only 10 digits!"
       // PHONE_REGEX.test(formValues.phone.value) ? "" : "Field can contain only numbers!"
     isValidate &= phoneErrorMessage === "";
 

@@ -15,8 +15,6 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 
-//TODO: Add respective links in navbar
-
 function VetNavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -69,17 +67,6 @@ function VetNavBar() {
                 display: { xs: "block", sm: "block", md: "none" },
               }}
             >
-              <MenuItem sx={{ textAlign: "center" }}>
-                <Button
-                  sx={{ my: 2, display: "block", color: "#1e69ba" }}
-                  onClick={() => {
-                    navigate("/comingsoon");
-                  }}
-                >
-                  Profile
-                </Button>
-              </MenuItem>
-              <hr />
               <MenuItem>
                 <Button
                   sx={{ my: 2, display: "block", color: "#1e69ba" }}

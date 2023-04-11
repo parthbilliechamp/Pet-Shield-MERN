@@ -215,14 +215,6 @@ module.exports.login = (req, res) => {
   }
 };
 
-module.exports.addAnimalData = (req, res) => {
-  res.send({
-    code: 200,
-    message: "Animal Added",
-    token: "hfgdhg",
-  });
-};
-
 module.exports.sendotp = async (req, res) => {
   console.log(req.body);
   const _otp = Math.floor(100000 + Math.random() * 900000);
@@ -401,5 +393,6 @@ module.exports.submitotp = (req, res) => {
       });
   }
 };
+
 
 

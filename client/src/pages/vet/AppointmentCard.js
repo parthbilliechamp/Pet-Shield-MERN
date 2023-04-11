@@ -16,6 +16,7 @@ import Slide from "@mui/material/Slide";
 import "./AppointmentPage.js";
 import axios from "axios";
 import p3 from "../../assets/images/Profileimg/p3.jpg";
+const BASE_URL = require("../../utils/url").default;
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -55,7 +56,7 @@ const AppointmentCard = (props) => {
     setConfirmationflag(true);
 
     axios
-      .post(`http://localhost:3001/cancelvetappointment/${props.id}`)
+      .post(`${BASE_URL}cancelvetappointment/${props.id}`)
       .then(function (response) {})
       .catch(function (error) {});
   };

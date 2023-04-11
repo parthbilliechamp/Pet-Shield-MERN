@@ -94,9 +94,18 @@ router.post("/cancelvetappointment/:id", (req, res) => {
 router.post("/registration", upload.single("photo"), userController.register);
 router.post("/login", userController.login);
 router.post("/adminlogin", userController.adminLogin);
-//app.post('/add-animals',sessionChecker, userController.addAnimalData)
 router.post("/submit-otp", userController.submitotp);
 router.post("/send-otp", userController.sendotp);
+
+//POST request to add pets in to Database
+router.post('/add-pets', (req, res) => {
+  petsController.addPetsData(req, res);
+})
+
+// DELETE request to delete pets
+router.delete('/delete-pet/:id', (req, res) => {
+  petsController.deletePetRecord(req, res);
+})
 
 //POST request to add the availability time slots from the vet for a particular date(utsav)
 router.post("/addavailability/:vetId", (req, res) => {

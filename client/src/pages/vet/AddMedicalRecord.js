@@ -50,8 +50,14 @@ export default function AddMedicalRecord() {
         })
             .then((response) => {
                 if (response.status === 200) {
-                    showAlert("Medical Records Added!");
-                    navigate('/medical_records', { state: { responseStatus: alert } })
+                    setAlert({
+                        message: "Medical Records Added!!",
+                        type: "Success",
+                    });
+                    setTimeout(() => {
+                        navigate('/medical_records', { state: { responseStatus: alert } })
+                        window.location.reload();
+                    }, 500);
                 } else {
                     showAlert("Error: Unable to add medical record", "Error");
                 }
@@ -72,7 +78,7 @@ export default function AddMedicalRecord() {
                         </Typography>
                         <br />
                         <hr />
-                        {alert && alert.type === 'Error' && <SuccessAlert alert={alert} />}
+                        {alert && <SuccessAlert alert={alert} />}
                         <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 3 }}>
                             <React.Fragment>
                                 <Typography align='center' variant="h6" gutterBottom>
