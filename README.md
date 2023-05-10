@@ -4,6 +4,11 @@
 * *Last Modification Date*: 28 Feb 2023
 * *Git URL (main branch)*: https://git.cs.dal.ca/ppc/group_5_csci5709
 
+# Project Report
+
+* Read the complete Project Report [here](https://drive.google.com/file/d/1nyLt6lew5xkzScqUvzw-wpsa1KE4-ZMG/view?usp=share_link/)
+* View the project video presentation [here](https://drive.google.com/file/d/1FtpufICTx5Z587p81sAezSGAQ3RC2Bdr/view?usp=share_link/)
+
 
 ## Authors
 
